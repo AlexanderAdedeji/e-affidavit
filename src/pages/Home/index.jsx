@@ -1,20 +1,23 @@
-import {useState} from "react"
+import { useState } from "react";
+import { HomeProvider } from "./context/Homecontext";
 
 import HomeLayout from "./layout/HomeLayout";
 
-
 const Home = () => {
   const [homeState, setHomeState] = useState({
-    headerTabs:"personal"
-  })
-
+    headerTabs: "personal",
+  });
 
 
   return (
-    <div id="home">
-      <HomeLayout setHomeState={setHomeState} homeState={homeState} />
-    </div>
+    <HomeProvider>
+      <div id="home">
+        <HomeLayout setHomeState={setHomeState} homeState={homeState} />
+      </div>
+    </HomeProvider>
   );
 };
+
+
 
 export default Home;

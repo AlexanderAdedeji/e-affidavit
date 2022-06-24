@@ -1,7 +1,9 @@
 import React from "react";
 import Template from "../../../assets/images/affidavit.png";
 import { useNavigate } from "react-router-dom";
-const TemplateCard = ({ name, id }) => {
+const TemplateCard = ({affidavit}) => {
+  const { name, id } = affidavit;
+
   const navigate = useNavigate();
   return (
     <div

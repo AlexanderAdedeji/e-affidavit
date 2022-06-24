@@ -1,17 +1,20 @@
+import { useContext } from "react";
 import { useState } from "react";
+import { HomeContext } from "../context/Homecontext";
 
 const Header = ({ homeState, setHomeState }) => {
+  const { setSearchKeyWord } = useContext(HomeContext);
+
+  const handleChange = (e) => {
+    setSearchKeyWord(e.target.value);
+  };
   return (
     <div id="header">
       <div id="top">
         <h4>Categories</h4>
 
         <div className="filter-by-container d-flex">
-          {/* {filterParam === "employee" && (
-            <EmployeeDropdown employees={usersState.employees} />
-          )}
-          {filterParam === "status" && <StatusDropdown />}
-          <Drop /> */}
+          <input type="search" onChange={handleChange} />
         </div>
       </div>
 
@@ -35,10 +38,10 @@ const Header = ({ homeState, setHomeState }) => {
               homeState.headerTabs === "property" && "active"
             }`}
             onClick={() => {
-             setHomeState((prevState) => ({
-               ...prevState,
-               headerTabs: "property",
-             }));
+              setHomeState((prevState) => ({
+                ...prevState,
+                headerTabs: "property",
+              }));
             }}
           >
             Property
@@ -48,10 +51,10 @@ const Header = ({ homeState, setHomeState }) => {
               homeState.headerTabs === "business" && "active"
             }`}
             onClick={() => {
-            setHomeState((prevState) => ({
-              ...prevState,
-              headerTabs: "business",
-            }));
+              setHomeState((prevState) => ({
+                ...prevState,
+                headerTabs: "business",
+              }));
             }}
           >
             Business
