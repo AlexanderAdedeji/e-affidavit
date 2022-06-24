@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { setUserSession } from "../../../helper/storage";
 import { login } from "../../../services/authService";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Login = ({ setAuthState }) => {
   let navigate = useNavigate();
@@ -13,6 +14,7 @@ const Login = ({ setAuthState }) => {
       password: "",
     },
     btnLoader: false,
+    isVerified: false,
   });
 
   const userLogin = useCallback(async (loginDetails) => {
@@ -42,6 +44,16 @@ const Login = ({ setAuthState }) => {
     }
   }, []);
 
+  const onChange = (value) => {
+    if (value) {
+      setLoginState((prevState) => ({
+        ...prevState,
+        isVerified: true,
+      }));
+    }
+
+    console.log("Captcha value:", value);
+  };
   return (
     <div className="auth">
       <div id="particles-js"></div>
@@ -94,9 +106,17 @@ const Login = ({ setAuthState }) => {
               Forget Password?
             </a>
 
+            <div className="recaptcha-box">
+              <ReCAPTCHA
+                sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+                onChange={onChange}
+              />
+            </div>
+
             <button
               class="btn1"
               type="button"
+              disabled={!loginState.isVerified}
               onClick={() => {
                 userLogin(loginState.loginData);
               }}

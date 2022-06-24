@@ -7,6 +7,9 @@ const Home = () => {
   const [homeState, setHomeState] = useState({
     headerTabs:"personal"
   })
+
+
+
   return (
     <div id="home">
       <HomeLayout setHomeState={setHomeState} homeState={homeState} />
