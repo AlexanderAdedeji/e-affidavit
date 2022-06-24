@@ -1,0 +1,48 @@
+#jurisdiction {
+  min-height: 100vh;
+  height: fit-content;
+
+  #jurisdiction-layout {
+    #body {
+      padding: 15px;
+      width: 100%;
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .select-jurisdiction {
+    width: 70%;
+    margin-top: 25px;
+    .go-back {
+  margin-bottom: 10px;
+      width: fit-content;
+      cursor: pointer;
+      img {
+        margin-right: 10px;
+      }
+      span {
+        font-family: Plus Jakarta Text;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 140%;
+        color: #5141a4;
+      }
+    }
+
+    #form-body {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      .button{
+        // background-color: #5c6bc0;
+        border:none ;
+        color: #fff;
+        padding: 10px;
+      }
+    }
+  }
+}

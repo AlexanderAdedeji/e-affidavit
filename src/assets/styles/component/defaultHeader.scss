@@ -1,0 +1,20 @@
+#default-header{
+  height: 78px;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #eeecf6;
+  box-sizing: border-box;
+  border-radius: 8px;
+  display: flex;
+  padding-left: 15px;
+  align-items: center;
+
+  .header-text {
+    font-family: Plus Jakarta Display;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 120%;
+    color: #14213d;
+  }
+}
