@@ -53,6 +53,23 @@ const Documents = () => {
     issuerAddress: "",
   });
 
+  const saveDocument = async () => {
+    Swal.fire({
+      title: "Do you want to save the changes?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        saveDocuments(documentVariables);
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
+  };
+
   const saveDocuments = useCallback(async (data) => {
     setBtnLoader((prevState) => ({
       ...prevState,
@@ -81,6 +98,7 @@ const Documents = () => {
       .then((res) => {
         console.log(res);
         toast.success("Document Saved Successfully");
+        Swal.fire("Saved!", "", "success");
         setDocumentState((prevState) => ({
           ...prevState,
           paymentBtnDisabled: false,
@@ -100,39 +118,6 @@ const Documents = () => {
       });
   }, []);
 
-  const payForDocument = useCallback(async (refNo, docId) => {
-    setBtnLoader((prevState) => ({
-      ...prevState,
-      submitBtn: true,
-    }));
-    const dataToSend = {
-      transaction_id: refNo,
-      user_id: user.id,
-      saved_document_id: docId,
-    };
-
-    console.log(dataToSend);
-
-    await payForDocumentAPI(dataToSend)
-      .then((res) => {
-        console.log(res);
-        toast.success("Payment Successfully");
-        setBtnLoader((prevState) => ({
-          ...prevState,
-          submitBtn: false,
-        }));
-        navigate("/paymentAcknowledgement", {
-          state: {
-            document: res.data,
-          },
-        });
-      })
-      .catch((errors) => {
-        toast.errors("Something went wrong");
-        console.log(errors);
-      });
-  }, []);
-
   return (
     <div className="documents ">
       <HomeNavHeader />
@@ -144,27 +129,28 @@ const Documents = () => {
               <button
                 className="btn btn-dark w-50"
                 onClick={() => {
-                  console.log(documentVariables);
-                  saveDocuments(documentVariables);
+                  saveDocument();
                 }}
               >
-                <>Save</>
-                {/* {btnLoader.saveBtn ? (
+                {btnLoader.saveBtn ? (
                   <div class="spinner-border text-light" role="status">
                     <span class="visually-hidden">Loading...</span>
                   </div>
                 ) : (
-                  <>Save</>
-                )} */}
+                  <span>Save</span>
+                )}
               </button>
             </div>
             <div className="col-md-6">
-              <Payment
-                user={user}
-                btnLoader={btnLoader}
-                documentState={documentState}
-                payForDocument={payForDocument}
-              />
+              <button
+                onClick={() =>
+                  navigate("/checkout", {
+                    state: { savedDocumentId: documentState.savedDocumentId },
+                  })
+                }
+              >
+                Check Out
+              </button>
             </div>
           </div>
         </div>

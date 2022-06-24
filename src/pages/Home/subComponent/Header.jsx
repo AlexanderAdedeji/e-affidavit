@@ -2,59 +2,46 @@ import { useContext } from "react";
 import { useState } from "react";
 import { HomeContext } from "../context/Homecontext";
 
-const Header = ({ homeState, setHomeState }) => {
-  const { setSearchKeyWord } = useContext(HomeContext);
+const Header = () => {
+  const { setSearchKeyWord, searchKeyWord, headerTab, updateHeaderTab } =
+    useContext(HomeContext);
 
   const handleChange = (e) => {
     setSearchKeyWord(e.target.value);
   };
+
   return (
     <div id="header">
       <div id="top">
         <h4>Categories</h4>
 
         <div className="filter-by-container d-flex">
-          <input type="search" onChange={handleChange} />
+          <input type="search" value={searchKeyWord} onChange={handleChange} />
         </div>
       </div>
 
       <div id="bottom">
         <div className="left">
           <span
-            className={`header-tab ${
-              homeState.headerTabs === "personal" && "active"
-            }`}
+            className={`header-tab ${headerTab === "personal" && "active"}`}
             onClick={() => {
-              setHomeState((prevState) => ({
-                ...prevState,
-                headerTabs: "personal",
-              }));
+              updateHeaderTab("personal");
             }}
           >
             Personal
           </span>
           <span
-            className={`header-tab ${
-              homeState.headerTabs === "property" && "active"
-            }`}
+            className={`header-tab ${headerTab === "property" && "active"}`}
             onClick={() => {
-              setHomeState((prevState) => ({
-                ...prevState,
-                headerTabs: "property",
-              }));
+              updateHeaderTab("property");
             }}
           >
             Property
           </span>
           <span
-            className={`header-tab ${
-              homeState.headerTabs === "business" && "active"
-            }`}
+            className={`header-tab ${headerTab === "business" && "active"}`}
             onClick={() => {
-              setHomeState((prevState) => ({
-                ...prevState,
-                headerTabs: "business",
-              }));
+              updateHeaderTab("business");
             }}
           >
             Business

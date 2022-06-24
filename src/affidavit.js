@@ -36,7 +36,7 @@ export const personalAffidavit = [
     name: "Financial Affidavit",
   },
   {
-    id: 9,
+    id: 21,
     name: "State Of Origin",
   },
   {
@@ -52,19 +52,19 @@ export const personalAffidavit = [
 
 export const PropertyAffidavit = [
   {
-    id: 1,
+    id: 12,
     name: "Car Insurance",
   },
   {
-    id: 2,
+    id: 23,
     name: "Land Affidavit",
   },
   {
-    id: 3,
+    id: 14,
     name: "Heirship",
   },
   {
-    id: 4,
+    id: 15,
     name: "Affidavit of Loss of Phone/Sim Pack",
   },
  
@@ -73,19 +73,19 @@ export const PropertyAffidavit = [
 
 export const BusinessAffidavit = [
     {
-      id: 1,
+      id: 16,
       name: "Car Insurance",
     },
     {
-      id: 2,
+      id: 17,
       name: "Land Affidavit",
     },
     {
-      id: 3,
+      id: 18,
       name: "Heirship",
     },
     {
-      id: 4,
+      id: 19,
       name: "Affidavit of Loss of Phone/Sim Pack",
     },
    

@@ -14,7 +14,7 @@ const Payment = ({ user, documentState, payForDocument, btnLoader }) => {
       lastName: data.last_name,
       onSuccess(transaction) {
         console.log(documentState);
-        payForDocument(transaction.reference, documentState.savedDocumentId);
+        payForDocument(transaction.reference, documentState);
       },
     });
   };

@@ -18,6 +18,8 @@ import CommissionerHome from "./pages/CommissionerHome";
 import PaymentAcknowledgement from "./pages/PaymentAcknowledgement";
 import Jurisdiction from "./pages/Jurisdiction";
 import LandingPage from "./pages/LandingPage";
+import AffidavitDocument from "./pages/AffideavitDocument";
+import CheckOut from "./pages/Checkout";
 function App() {
 
 
@@ -25,6 +27,8 @@ useEffect(()=>{
    document.title = "E-Affidavit";
 },[])
  
+
+
   return (
     <div className="App">
       <Router>
@@ -39,6 +43,7 @@ useEffect(()=>{
           <Route path="/payment" element={<Payment />} />
           <Route path="/commissionerLogin" element={<CommissionerSignIn />} />
           <Route path="/commissionerHome" element={<CommissionerHome />} />
+          <Route path="/checkout" element={<CheckOut/>}/>
           <Route
             path="/paymentAcknowledgement"
             element={<PaymentAcknowledgement />}
@@ -49,5 +54,7 @@ useEffect(()=>{
     </div>
   );
 }
+
+// AffidavitDocument
 
 export default App;

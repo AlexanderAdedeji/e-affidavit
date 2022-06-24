@@ -66,7 +66,8 @@ const Login = ({ setAuthState }) => {
             </h4>
             <h5>Sign in to your account.</h5>
             <input
-              type="text"
+              type="email"
+              required
               name="email"
               placeholder="Email"
               autocomplete="off"
@@ -85,6 +86,7 @@ const Login = ({ setAuthState }) => {
               type="password"
               name="password"
               placeholder="Passsword"
+              required
               id="pwd"
               autocomplete="off"
               onChange={(e) => {
