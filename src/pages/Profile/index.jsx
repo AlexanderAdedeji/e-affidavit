@@ -92,10 +92,6 @@ const Profile = () => {
     } else {
       if (obj.isSigned) {
         setSignature(obj.imageData);
-        // setSignature((prevState) => ({
-        //   ...prevState,
-        //   base64: obj.imageData,
-        // }));
       }
     }
   }

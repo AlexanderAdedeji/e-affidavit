@@ -20,6 +20,7 @@ import Jurisdiction from "./pages/Jurisdiction";
 import LandingPage from "./pages/LandingPage";
 import AffidavitDocument from "./pages/AffideavitDocument";
 import CheckOut from "./pages/Checkout";
+import VerifierHome from "./pages/VerifierHome";
 function App() {
 
 
@@ -42,8 +43,9 @@ useEffect(()=>{
           <Route path="/selectJusrisdiction/:id" element={<Jurisdiction />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/commissionerLogin" element={<CommissionerSignIn />} />
-          <Route path="/commissionerHome" element={<CommissionerHome />} />
           <Route path="/checkout" element={<CheckOut/>}/>
+          <Route path="/commissionerHome" element={<CommissionerHome />} />
+          <Route path="/verifierHome" element={<VerifierHome />} />
           <Route
             path="/paymentAcknowledgement"
             element={<PaymentAcknowledgement />}

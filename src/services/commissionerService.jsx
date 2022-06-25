@@ -17,3 +17,11 @@ export const fetchDocument= async (data) => {
 
   );
 };
+
+
+export const attestDocument =async (data) =>{
+  return await axios.post(
+    `${process.env.REACT_APP_BASE_URL}commissioner/attest_document`,
+    data
+  );
+}

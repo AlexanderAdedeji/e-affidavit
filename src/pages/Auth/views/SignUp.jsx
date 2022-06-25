@@ -48,10 +48,10 @@ const SignUp = ({ setAuthState }) => {
   return (
     <div id="signUpAuth">
       <div id="particles-js"></div>
-      <div class="animated bounceInDown">
-        <div class="container-box">
-          <span class="error animated tada" id="msg"></span>
-          <form name="form1" class="box">
+      <div className="animated bounceInDown">
+        <div className="container-box">
+          <span className="error animated tada" id="msg"></span>
+          <form name="form1" className="box">
             <h4>
               User <span>Sign Up</span>
             </h4>
@@ -102,7 +102,7 @@ const SignUp = ({ setAuthState }) => {
                 }));
               }}
             />
-            <i class="typcn typcn-eye" id="eye"></i>
+            <i className="typcn typcn-eye" id="eye"></i>
             <input
               type="password"
               name="password"
@@ -122,15 +122,15 @@ const SignUp = ({ setAuthState }) => {
 
 
             <button
-              class="btn1"
+              className="btn1"
               type="button"
               onClick={() => {
                 userSignUp(signUpState.signUpData);
               }}
             >
               {signUpState.btnLoader ? (
-                <div class="spinner-border text-light" role="status">
-                  <span class="visually-hidden">Loading...</span>
+                <div className="spinner-border text-light" role="status">
+                  <span className="visually-hidden">Loading...</span>
                 </div>
               ) : (
                 <>Sign Up</>
@@ -138,7 +138,7 @@ const SignUp = ({ setAuthState }) => {
             </button>
           </form>
           <span
-            className="dnthave text-light"
+            classNameName="dnthave text-light"
             onClick={() => {
               setAuthState((prevState) => ({
                 ...prevState,
@@ -149,9 +149,9 @@ const SignUp = ({ setAuthState }) => {
            Already have an account? Sign in
           </span>
         </div>
-        {/* <div class="footer">
+        {/* <div className="footer">
           <span>
-            Made with <i class="fa fa-heart pulse"></i>
+            Made with <i className="fa fa-heart pulse"></i>
             <a href="https://www.google.de/maps/place/Augsburger+Puppenkiste/@48.360357,10.903245,17z/data=!3m1!4b1!4m2!3m1!1s0x479e98006610a511:0x73ac6b9f80c4048f">
               <a href="https://codepen.io/lordgamer2354">By Anees Khan</a>{" "}
             </a>

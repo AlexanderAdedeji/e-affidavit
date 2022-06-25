@@ -21,16 +21,26 @@ const TestDocument = ({
   commissionerSignature,
   issuer,
   issuerAddress,
+  image,
 }) => {
   let wow = new Date();
   return (
     <div className="container text-document">
+
+      <div>
+
       {qr_code && (
         <div className="qr-code">
           <img src={`data:image/png;base64, ${qr_code}`} alt="" width="150" />
           <p>{id}</p>
         </div>
       )}
+
+      <div>
+        <img src={image} width={100} alt="affidavit-pic"/>
+      </div>
+      </div>
+
       <u>
         <h3>
           <span className="primary">

@@ -48,7 +48,7 @@ const Documents = () => {
     city: location.state.jurisdiction,
     docNo: "",
     docType: "",
-
+    image:"",
     issuer: "",
     issuerAddress: "",
   });
@@ -75,6 +75,7 @@ const Documents = () => {
       ...prevState,
       saveBtn: true,
     }));
+    console.log(data.image.split(",")[1])
     const dataToSend = {
       user_id: user.id,
       document_category_id: id,
@@ -90,7 +91,7 @@ const Documents = () => {
       city: data.city,
       docNo: data.docNo,
       docType: data.docType,
-
+      image:data.image,
       issuer: data.issuer,
       issuerAddress: data.issuerAddress,
     };
@@ -117,6 +118,21 @@ const Documents = () => {
         }));
       });
   }, []);
+
+  const convert2base64 = (e) => {
+    console.log(e.target)
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setDocumentVariables((prevState) => ({
+        ...prevState,
+        image: reader.result.toString(),
+      }));
+    };
+    reader.readAsDataURL(file);
+    console.log(documentVariables.image)
+  };
 
   return (
     <div className="documents ">
@@ -158,6 +174,7 @@ const Documents = () => {
           <FieldSection
             {...documentVariables}
             setDocumentVariables={setDocumentVariables}
+            convert2base64={convert2base64}
           />
         </div>
       </div>

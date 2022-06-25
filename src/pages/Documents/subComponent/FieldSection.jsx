@@ -9,9 +9,21 @@ const FieldSection = ({
   court,
   gender,
   religion,
+  convert2base64,
 }) => {
   return (
     <div className="field-section mt-4">
+      <div className="mb-3 form-field">
+        <label htmlFor="fileupload" className="form-label">
+          Upload Image
+        </label>
+        <input
+        id="fileupload"
+          type="file"
+          // className="plain-input form-control"
+          onChange={(e) => {convert2base64(e); console.log(e.target.value)}}
+        />
+      </div>
       <div className="mb-3 form-field">
         <label htmlFor="doc-no" className="form-label">
           Document Type

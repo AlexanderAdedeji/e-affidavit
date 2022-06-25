@@ -55,12 +55,12 @@ const Login = ({ setAuthState }) => {
     console.log("Captcha value:", value);
   };
   return (
-    <div className="auth">
+    <div classNameName="auth">
       <div id="particles-js"></div>
-      <div class="animated bounceInDown">
-        <div class="container-box">
-          <span class="error animated tada" id="msg"></span>
-          <form name="form1" class="box">
+      <div className="animated bounceInDown">
+        <div className="container-box">
+          <span className="error animated tada" id="msg"></span>
+          <form name="form1" className="box">
             <h4>
               User <span>Login</span>
             </h4>
@@ -81,7 +81,7 @@ const Login = ({ setAuthState }) => {
                 }));
               }}
             />
-            <i class="typcn typcn-eye" id="eye"></i>
+            <i className="typcn typcn-eye" id="eye"></i>
             <input
               type="password"
               name="password"
@@ -102,13 +102,13 @@ const Login = ({ setAuthState }) => {
             <label>
               <input type="checkbox" />
               <span></span>
-              <small class="rmb">Remember me</small>
+              <small className="rmb">Remember me</small>
             </label>
-            <a href="#" class="forgetpass">
+            <a href="#" className="forgetpass">
               Forget Password?
             </a>
 
-            <div className="recaptcha-box">
+            <div classNameName="recaptcha-box">
               <ReCAPTCHA
                 sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
                 onChange={onChange}
@@ -116,7 +116,7 @@ const Login = ({ setAuthState }) => {
             </div>
 
             <button
-              class="btn1"
+              className="btn1"
               type="button"
               disabled={!loginState.isVerified}
               onClick={() => {
@@ -124,8 +124,8 @@ const Login = ({ setAuthState }) => {
               }}
             >
               {loginState.btnLoader ? (
-                <div class="spinner-border text-light" role="status">
-                  <span class="visually-hidden">Loading...</span>
+                <div className="spinner-border text-light" role="status">
+                  <span className="visually-hidden">Loading...</span>
                 </div>
               ) : (
                 <>Sign in</>
@@ -134,7 +134,7 @@ const Login = ({ setAuthState }) => {
           </form>
           <a
             href="#"
-            class="dnthave"
+            className="dnthave"
             onClick={() => {
               setAuthState((prevState) => ({
                 ...prevState,
@@ -145,9 +145,9 @@ const Login = ({ setAuthState }) => {
             Don’t have an account? <span></span>Sign up
           </a>
         </div>
-        <div class="footer">
+        <div className="footer">
           <span>
-            {/* Made with <i class="fa fa-heart pulse"></i>
+            {/* Made with <i className="fa fa-heart pulse"></i>
             <a href="https://www.google.de/maps/place/Augsburger+Puppenkiste/@48.360357,10.903245,17z/data=!3m1!4b1!4m2!3m1!1s0x479e98006610a511:0x73ac6b9f80c4048f">
               <a href="https://codepen.io/lordgamer2354">By Anees Khan</a>{" "}
             </a> */}
@@ -160,17 +160,17 @@ const Login = ({ setAuthState }) => {
 
 export default Login;
 
-// <div class="auth text-center">
-//   <main class="form-signin  m-auto">
+// <div className="auth text-center">
+//   <main className="form-signin  m-auto">
 //     <form>
-//       <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+//       <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
 
-//       <div class="form-floating">
+//       <div className="form-floating">
 //         <input
 //           type="email"
 //           placeholder="Email"
 //           required=""
-//           class="form-control"
+//           className="form-control"
 //           onChange={(e) => {
 //             setLoginState((prevState) => ({
 //               ...prevState,
@@ -183,11 +183,11 @@ export default Login;
 //         />
 //         <label for="floatingInput">Email address</label>
 //       </div>
-//       <div class="form-floating">
+//       <div className="form-floating">
 //         <input
 //           type="password"
 //           name="pswd"
-//           class="form-control"
+//           className="form-control"
 //           placeholder="Password"
 //           required=""
 //           onChange={(e) => {
@@ -203,21 +203,21 @@ export default Login;
 //         <label for="floatingPassword">Password</label>
 //       </div>
 
-//       <div class="checkbox mb-3">
+//       <div className="checkbox mb-3">
 //         <label>
 //           <input type="checkbox" value="remember-me" /> Remember me
 //         </label>
 //       </div>
 //       <button
-//         class="w-100 btn btn-lg btn-primary"
+//         className="w-100 btn btn-lg btn-primary"
 //         type="button"
 //         onClick={() => {
 //           userLogin(loginState.loginData);
 //         }}
 //       >
 //         {loginState.btnLoader ? (
-//           <div class="spinner-border text-light" role="status">
-//             <span class="visually-hidden">Loading...</span>
+//           <div className="spinner-border text-light" role="status">
+//             <span className="visually-hidden">Loading...</span>
 //           </div>
 //         ) : (
 //           <>Sign in</>
@@ -232,12 +232,12 @@ export default Login;
 //               newAccount: true,
 //             }));
 //           }}
-//           className="text-primary new-account"
+//           classNameName="text-primary new-account"
 //         >
 //           Create One
 //         </span>
 //       </p>
-//       <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
+//       <p className="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
 //     </form>
 //   </main>
 // </div>;

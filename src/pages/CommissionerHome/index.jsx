@@ -1,5 +1,8 @@
 import { useCallback, useState } from "react";
-import { fetchDocument } from "../../services/commissionerService";
+import {
+  attestDocument,
+  fetchDocument,
+} from "../../services/commissionerService";
 import TestDocument from "../Documents/subComponent/TestDocument";
 import NavBarHeader from "./subComponent/NavHeader";
 import { getUser } from "../../helper/storage";
@@ -48,7 +51,8 @@ const CommissionerHome = () => {
 
   var imgWidth;
   var imgHeight;
-  const StartSign = () => {
+  const StartSign = (who) => {
+    console.log(who);
     var isInstalled = document.documentElement.getAttribute(
       "SigPlusExtLiteExtension-installed"
     );
@@ -74,7 +78,12 @@ const CommissionerHome = () => {
       minSigPoints: 25,
     };
 
-    document.addEventListener("SignResponse", SignResponse, false);
+    document.addEventListener(
+      "SignResponse",
+      (event) => SignResponse(event, who),
+      false
+    );
+
     var messageData = JSON.stringify(message);
     var element = document.createElement("MyExtensionDataElement");
     element.setAttribute("messageAttribute", messageData);
@@ -83,22 +92,16 @@ const CommissionerHome = () => {
     evt.initEvent("SignStartEvent", true, false);
     element.dispatchEvent(evt);
   };
-  const SignResponse = (event) => {
-    console.log("despodent");
+  const SignResponse = (event, who) => {
+    console.log(who);
     var str = event.target.getAttribute("msgAttribute");
     var obj = JSON.parse(str);
-    console.log();
-    SetValues(obj);
+    console.log(who === "deponent" ? "d" : "c");
+
+    SetValues(obj, who);
   };
 
-  const SignCommissionerResponse = (event) => {
-    console.log("comm");
-    var str = event.target.getAttribute("msgAttribute");
-    var obj = JSON.parse(str);
-    console.log();
-    SetValues(obj);
-  };
-  function SetValues(objResponse) {
+  function SetValues(objResponse, who) {
     var obj = null;
     if (typeof objResponse === "string") {
       obj = JSON.parse(objResponse);
@@ -113,10 +116,19 @@ const CommissionerHome = () => {
       alert(obj.errorMsg);
     } else {
       if (obj.isSigned) {
-        setSignature((prevState) => ({
-          ...prevState,
-          base64: obj.imageData,
-        }));
+        if (who === "deponent") {
+          setSignature((prevState) => ({
+            ...prevState,
+            base64: obj.imageData,
+          }));
+        }
+
+        if (who === "commissioner") {
+          setSignature((prevState) => ({
+            ...prevState,
+            commissionerSignature: obj.imageData,
+          }));
+        }
       }
     }
   }
@@ -149,6 +161,20 @@ const CommissionerHome = () => {
     console.log(searchItem);
   }, []);
 
+  const saveDocument = async () => {
+    const htmlData = document.getElementById("documents").innerHTML;
+    const dataToSend = {
+      document_ref: search,
+      document: htmlData,
+    };
+    try {
+      const { data } = attestDocument(dataToSend);
+      console.log(data);
+    } catch (errors) {
+      console.log(errors);
+    }
+  };
+
   return (
     <div className="commissioner-home">
       <NavBarHeader
@@ -162,7 +188,7 @@ const CommissionerHome = () => {
         <NoFile text="No Documents Found" />
       ) : (
         <div className="row doc-display">
-          <div className="col-md-9">
+          <div id="documents" className="col-md-9">
             <TestDocument
               {...state.searchResult}
               signature={signature.base64}
@@ -171,19 +197,19 @@ const CommissionerHome = () => {
             />
           </div>
           <div className="col-md-3 noprint  mb-3">
-            {!signature.base64 && (
-              <div className="text-center">
-                <button
-                  className="mx-3 btn btn-dark w-75"
-                  disabled={false}
-                  onClick={() => {
-                    StartSign();
-                  }}
-                >
-                  Despodent Sign
-                </button>
-              </div>
-            )}
+            {/* {!signature.base64 && ( */}
+            <div className="text-center">
+              <button
+                className="mx-3 btn btn-dark w-75"
+                disabled={false}
+                onClick={() => {
+                  StartSign("deponent");
+                }}
+              >
+                Deponent Sign
+              </button>
+            </div>
+            {/* )} */}
             {signature.base64 && (
               <div className="mt-3">
                 <SelectDropDown>
@@ -191,13 +217,13 @@ const CommissionerHome = () => {
                     <span className="pr-5">Commissioner Signature</span>
                   </DropdownToggle>
                   <DropdownMenu className="dropdown-container">
-                    {/* <DropdownItem
-                    onClick={() => {
-                      StartSign();
-                    }}
-                  >
-                    Sign
-                  </DropdownItem> */}
+                    <DropdownItem
+                      onClick={() => {
+                        StartSign("commissioner");
+                      }}
+                    >
+                      Sign
+                    </DropdownItem>
                     <DropdownItem
                       onClick={() => {
                         appendSignature(user);
@@ -209,6 +235,18 @@ const CommissionerHome = () => {
                 </SelectDropDown>
               </div>
             )}
+
+            <div className="text-center my-3">
+              <button
+                className="mr-3 btn btn-dark w-75"
+                disabled={!signature.base64 || !signature.commissionerSignature}
+                onClick={() => {
+                  saveDocument();
+                }}
+              >
+                Save Document
+              </button>
+            </div>
 
             {signature.commissionerSignature && (
               <div className="text-center my-3">
