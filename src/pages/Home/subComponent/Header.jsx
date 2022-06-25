@@ -7,6 +7,7 @@ const Header = () => {
     useContext(HomeContext);
 
   const handleChange = (e) => {
+    console.log(e.target.value)
     setSearchKeyWord(e.target.value);
   };
 

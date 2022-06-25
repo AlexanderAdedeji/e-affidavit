@@ -19,7 +19,7 @@ export const HomeProvider = ({ children }) => {
   };
   const searchItemsArr = (keyword, itemsArr) => {
     return itemsArr.filter((items) =>
-      items.name.toLowerCase().includes(keyword)
+      items.name.toLowerCase().includes(keyword.toLowerCase())
     );
   };
   const value = { searchKeyWord, searchItemsArr, setSearchKeyWord,updateHeaderTab,headerTab };
