@@ -15,7 +15,7 @@ const QRDocumentSearch = () => {
   });
 
   useEffect(() => {
-    console.log(documentRef);
+    getDocument(documentRef);
   }, []);
 
   const getDocument = async (searchData) => {
