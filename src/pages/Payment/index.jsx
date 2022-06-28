@@ -20,23 +20,24 @@ const Payment = ({ user, documentState, payForDocument, btnLoader }) => {
   };
 
   return (
-    <>
+    <div className="text-center">
       <button
         className="btn btn-outline-dark  w-50"
+        type="button"
         onClick={() => {
           payStack(user);
         }}
         // disabled={documentState.paymentBtnDisabled}
       >
-        {btnLoader.submitBtn ? (
-          <div class="spinner-border text-dark sm" role="status">
+        {btnLoader ? (
+          <div class="spinner-border text-white sm" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
         ) : (
-          <> Submit</>
+          <span> Proceed To Checkout</span>
         )}
       </button>
-    </>
+    </div>
   );
 };
 

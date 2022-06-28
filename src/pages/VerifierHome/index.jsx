@@ -1,44 +1,62 @@
 import { useState, useEffect } from "react";
+import DocumentLandingPage from "../../component/DocumentLandingPage";
 import { fetchAttestedDocument } from "../../services/verifierService";
+import VerifierNavHeader from "./subComponent/VerifierNavHeader";
+import { toast } from "react-toastify";
+import NoFile from "../../component/NoFile";
 
 const VerifierHome = () => {
-  const [documentVerified, setDocument] = useState({});
+  const [documentVerified, setDocument] = useState(null);
   const [search, setSearch] = useState("");
-
+  const [verifierState, setVerifierState] = useState({
+    btnLoader: false,
+    noFile: false,
+  });
   const getDocument = async (searchData) => {
-    console.log(search)
+    setVerifierState((prevState) => ({
+      ...prevState,
+      btnLoader: true,
+    }));
     try {
       const { data } = await fetchAttestedDocument(searchData);
       setDocument(data);
-      console.log(data)
+      setVerifierState((prevState) => ({
+        ...prevState,
+        btnLoader: false,
+      }));
+      toast.success("Document Found");
     } catch (errors) {
-      console.log("hello word");
+      setVerifierState((prevState) => ({
+        ...prevState,
+        btnLoader: false,
+      }));
+      toast.error("Document Not Found");
     }
   };
 
-
-
-  useEffect(()=>{
-    document.getElementById("verified-document").innerHTML=documentVerified.document
-  },[documentVerified])
+  useEffect(() => {
+    if (documentVerified) {
+      document.getElementById("verified-document").innerHTML =
+        documentVerified.document;
+    }
+  }, [documentVerified]);
 
   return (
     <div>
-      <input
-        type="search"
-        onChange={(e) => {
-          setSearch(e.target.value);
-        }}
+      <VerifierNavHeader
+        getDocument={getDocument}
+        setSearch={setSearch}
+        search={search}
+        btnLoader={verifierState.btnLoader}
       />
-      <button
-        onClick={() => {
-          getDocument(search);
-        }}
-      >
-        Search
-      </button>
 
-      <div id="verified-document">{document.document}</div>
+      <div id="verified-document">
+        {verifierState.noFile ? (
+          <NoFile text="No Documents Found" />
+        ) : (
+          <DocumentLandingPage text="" />
+        )}
+      </div>
     </div>
   );
 };

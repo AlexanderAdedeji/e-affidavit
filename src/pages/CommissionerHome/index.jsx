@@ -1,137 +1,67 @@
-import { useCallback, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import {
   attestDocument,
   fetchDocument,
 } from "../../services/commissionerService";
-import TestDocument from "../Documents/subComponent/TestDocument";
+// import TestDocument from "../Documents/subComponent/TestDocument";
 import NavBarHeader from "./subComponent/NavHeader";
 import { getUser } from "../../helper/storage";
 import { toast } from "react-toastify";
 import NoFile from "../../component/NoFile";
 import { dateTimeFormatter } from "../../helper/dateTimeFormat";
 import SelectDropDown from "../../component/SelectDropdown";
-import {
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Dropdown,
-} from "reactstrap";
+import { DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+
+import LossOfDocumentTemplate from "../../DocumentsTemplates/LossOfDocuments/subComponent/LossOfDocumentTemplate";
+import ChangeOfName from "../../DocumentsTemplates/ChangeOfName";
+import { CommissionerContext } from "./hooks/CommissionerContext";
+import DocumentLandingPage from "../../component/DocumentLandingPage";
+import Swal from "sweetalert2";
 
 const CommissionerHome = () => {
   const user = getUser();
-  console.log(user);
+  const [documentTemplate, setDocumentTemplate] = useState("");
+  const { setWhoIsSigning, signature, setSignature, setStamp, stamp } =
+    useContext(CommissionerContext);
   const [search, setSearch] = useState("");
   const [date] = useState(dateTimeFormatter());
 
   const [state, setState] = useState({
     searchResult: {},
     searchComplete: false,
+    landing: true,
     btnLoader: false,
+    saveBtnLoader: false,
+  });
+
+  const [actionsToShow, setActionsToShow] = useState({
+    attestDocument: false,
+    saveDocument: false,
+    print: false,
   });
 
   const appendSignature = (userData) => {
-    console.log(user);
     if (userData.signature === null || userData.signature === "") {
       console.log("here");
       toast.error("Head to your profile to Upload Signature");
       return;
     }
-    console.log(userData);
+
     setSignature((prevState) => ({
       ...prevState,
       commissionerSignature: userData?.signature,
     }));
   };
 
-  const [signature, setSignature] = useState({
-    base64: "",
-    img: "",
-    commissionerSignature: "",
-  });
-
-  var imgWidth;
-  var imgHeight;
-  const StartSign = (who) => {
-    console.log(who);
-    var isInstalled = document.documentElement.getAttribute(
-      "SigPlusExtLiteExtension-installed"
-    );
-    if (!isInstalled) {
-      alert(
-        "SigPlusExtLite extension is either not installed or disabled. Please install or enable extension."
-      );
+  const appendStamp = (userData) => {
+    if (userData.signature === null || userData.signature === "") {
+      console.log("here");
+      toast.error("Head to your profile to Upload Signature");
       return;
     }
 
-    var message = {
-      firstName: "",
-      lastName: "",
-      eMail: "",
-      location: "",
-      imageFormat: 1,
-      imageX: imgWidth,
-      imageY: imgHeight,
-      imageTransparency: false,
-      imageScaling: false,
-      maxUpScalePercent: 0.0,
-      rawDataFormat: "ENC",
-      minSigPoints: 25,
-    };
-
-    document.addEventListener(
-      "SignResponse",
-      (event) => SignResponse(event, who),
-      false
-    );
-
-    var messageData = JSON.stringify(message);
-    var element = document.createElement("MyExtensionDataElement");
-    element.setAttribute("messageAttribute", messageData);
-    document.documentElement.appendChild(element);
-    var evt = document.createEvent("Events");
-    evt.initEvent("SignStartEvent", true, false);
-    element.dispatchEvent(evt);
+    setStamp(userData?.stamp);
   };
-  const SignResponse = (event, who) => {
-    console.log(who);
-    var str = event.target.getAttribute("msgAttribute");
-    var obj = JSON.parse(str);
-    console.log(who === "deponent" ? "d" : "c");
-
-    SetValues(obj, who);
-  };
-
-  function SetValues(objResponse, who) {
-    var obj = null;
-    if (typeof objResponse === "string") {
-      obj = JSON.parse(objResponse);
-    } else {
-      obj = JSON.parse(JSON.stringify(objResponse));
-    }
-    if (
-      obj.errorMsg != null &&
-      obj.errorMsg !== "" &&
-      obj.errorMsg !== "undefined"
-    ) {
-      alert(obj.errorMsg);
-    } else {
-      if (obj.isSigned) {
-        if (who === "deponent") {
-          setSignature((prevState) => ({
-            ...prevState,
-            base64: obj.imageData,
-          }));
-        }
-
-        if (who === "commissioner") {
-          setSignature((prevState) => ({
-            ...prevState,
-            commissionerSignature: obj.imageData,
-          }));
-        }
-      }
-    }
-  }
 
   const getDocument = useCallback(async (searchItem) => {
     setState((prevState) => ({
@@ -141,10 +71,13 @@ const CommissionerHome = () => {
 
     await fetchDocument(searchItem)
       .then((res) => {
+        console.log(res.data);
+        setDocumentTemplate(res.data?.document_category);
         setState((prevState) => ({
           ...prevState,
           searchResult: res.data,
           searchComplete: true,
+          landing: false,
           btnLoader: false,
         }));
       })
@@ -152,6 +85,7 @@ const CommissionerHome = () => {
         setState((prevState) => ({
           ...prevState,
           btnLoader: false,
+          landing: false,
           searchResult: {},
           searchComplete: false,
         }));
@@ -162,6 +96,10 @@ const CommissionerHome = () => {
   }, []);
 
   const saveDocument = async () => {
+    setState((prevState) => ({
+      ...prevState,
+      saveBtnLoader: true,
+    }));
     const htmlData = document.getElementById("documents").innerHTML;
     const dataToSend = {
       document_ref: search,
@@ -169,10 +107,33 @@ const CommissionerHome = () => {
     };
     try {
       const { data } = attestDocument(dataToSend);
+      setState((prevState) => ({
+        ...prevState,
+        saveBtnLoader: false,
+      }));
+      setActionsToShow((prevState) => ({
+        ...prevState,
+        saveDocument: false,
+        print: true,
+      }));
+      Swal.fire("Good job!", "Document Saved Successfully", "success");
+      toast.success("DocumentSaved Successfully");
       console.log(data);
     } catch (errors) {
+      setState((prevState) => ({
+        ...prevState,
+        saveBtnLoader: false,
+      }));
       console.log(errors);
     }
+  };
+
+  const commissionerSignHandler = async () => {
+    setWhoIsSigning("COMMISSIONER");
+  };
+
+  const deponentSignHandler = async () => {
+    setWhoIsSigning("DEPONENT");
   };
 
   return (
@@ -184,44 +145,44 @@ const CommissionerHome = () => {
         btnLoader={state.btnLoader}
       />
 
-      {Object.keys(state.searchResult).length === 0 ? (
+      {state.landing ? (
+        <DocumentLandingPage text="" />
+      ) : Object.keys(state.searchResult).length === 0 ? (
         <NoFile text="No Documents Found" />
       ) : (
         <div className="row doc-display">
           <div id="documents" className="col-md-9">
-            <TestDocument
-              {...state.searchResult}
-              signature={signature.base64}
-              commissionerSignature={signature.commissionerSignature}
-              date={date}
-            />
+            {documentTemplate === "documentLoss" && (
+              <LossOfDocumentTemplate
+                {...state.searchResult}
+                deponentSignature={signature.deponentSignature}
+                commissionerSignature={signature.commissionerSignature}
+                date={date}
+                commissionerStamp={stamp}
+              />
+            )}
+            {documentTemplate === "nameChange" && <ChangeOfName />}
           </div>
           <div className="col-md-3 noprint  mb-3">
-            {/* {!signature.base64 && ( */}
-            <div className="text-center">
-              <button
-                className="mx-3 btn btn-dark w-75"
-                disabled={false}
-                onClick={() => {
-                  StartSign("deponent");
-                }}
-              >
-                Deponent Sign
-              </button>
-            </div>
-            {/* )} */}
-            {signature.base64 && (
+            {!signature.deponentSignature && (
+              <div className="text-center">
+                <button
+                  className="mx-3 btn btn-dark w-75"
+                  disabled={false}
+                  onClick={deponentSignHandler}
+                >
+                  Deponent Sign
+                </button>
+              </div>
+            )}
+            {signature.deponentSignature && !signature.commissionerSignature && (
               <div className="mt-3">
                 <SelectDropDown>
                   <DropdownToggle color="" className="border px-3" caret>
                     <span className="pr-5">Commissioner Signature</span>
                   </DropdownToggle>
                   <DropdownMenu className="dropdown-container">
-                    <DropdownItem
-                      onClick={() => {
-                        StartSign("commissioner");
-                      }}
-                    >
+                    <DropdownItem onClick={commissionerSignHandler}>
                       Sign
                     </DropdownItem>
                     <DropdownItem
@@ -236,25 +197,44 @@ const CommissionerHome = () => {
               </div>
             )}
 
-            <div className="text-center my-3">
-              <button
-                className="mr-3 btn btn-dark w-75"
-                disabled={!signature.base64 || !signature.commissionerSignature}
-                onClick={() => {
-                  saveDocument();
-                }}
-              >
-                Save Document
-              </button>
-            </div>
+            {signature.commissionerSignature &&
+              signature.deponentSignature &&
+              !stamp && (
+                <div className="text-center my-3">
+                  <button
+                    className="mr-3 btn btn-dark w-75"
+                    onClick={() => {
+                      appendStamp(user);
+                    }}
+                  >
+                    Attest Stamp
+                  </button>
+                </div>
+              )}
 
-            {signature.commissionerSignature && (
+            {stamp && !actionsToShow.print && (
               <div className="text-center my-3">
                 <button
                   className="mr-3 btn btn-dark w-75"
-                  disabled={
-                    !signature.base64 || !signature.commissionerSignature
-                  }
+                  onClick={() => {
+                    saveDocument();
+                  }}
+                >
+                  {state.saveBtnLoader ? (
+                    <div className="spinner-border text-light" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  ) : (
+                    <span>Save Document</span>
+                  )}
+                </button>
+              </div>
+            )}
+
+            {actionsToShow.print && (
+              <div className="text-center my-3">
+                <button
+                  className="mr-3 btn btn-dark w-75"
                   onClick={() => {
                     window.print();
                   }}

@@ -16,3 +16,12 @@ export const signatureUpload = async (data) => {
     data
   );
 };
+
+
+
+export const stampUpload = async (data) => {
+  return await axios.put(
+    `${process.env.REACT_APP_BASE_URL}commissioner/update_stamp`,
+    data
+  );
+};

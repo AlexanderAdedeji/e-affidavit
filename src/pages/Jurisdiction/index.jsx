@@ -6,13 +6,13 @@ import JurisdictionLayout from "./layout/JurisdictionLayout";
 
 const Jurisdiction = () => {
   let { id } = useParams();
+  const location = useLocation()
+  console.log(location)
   const [jurisdictionState, setJurisdictionState] = useState({
     state: "",
     jurisdiction: "",
     court: "",
   });
-
-  const navigate = useNavigate();
 
   return (
     <div id="jurisdiction">

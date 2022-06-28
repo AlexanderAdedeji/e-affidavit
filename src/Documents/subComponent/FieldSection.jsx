@@ -4,6 +4,9 @@ import SelectDropDown from "../../../component/SelectDropdown";
 
 const FieldSection = ({
   setDocumentVariables,
+  state,
+  city,
+  court,
   gender,
   religion,
   convert2base64,

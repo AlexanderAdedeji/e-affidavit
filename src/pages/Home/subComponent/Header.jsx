@@ -7,7 +7,7 @@ const Header = () => {
     useContext(HomeContext);
 
   const handleChange = (e) => {
-    console.log(e.target.value)
+    console.log(e.target.value);
     setSearchKeyWord(e.target.value);
   };
 
@@ -17,7 +17,13 @@ const Header = () => {
         <h4>Categories</h4>
 
         <div className="filter-by-container d-flex">
-          <input type="search" value={searchKeyWord} onChange={handleChange} />
+          <input
+            type="search"
+            placeholder="Search Affidavit..."
+            value={searchKeyWord}
+            onChange={handleChange}
+            className="form-control"
+          />
         </div>
       </div>
 

@@ -38,6 +38,7 @@ const NavBarHeader = ({
           <>
             <input
               type="search"
+              className=""
               onChange={(e) => {
                 setSearch(e.target.value);
               }}

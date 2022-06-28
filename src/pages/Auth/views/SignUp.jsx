@@ -1,11 +1,11 @@
-import { findAllByDisplayValue } from "@testing-library/react";
-import {useNavigate} from "react-router-dom"
+import ReCAPTCHA from "react-google-recaptcha";
+import { useNavigate } from "react-router-dom";
 import { useState, useCallback } from "react";
 import { toast } from "react-toastify";
 import { login, signUp } from "../../../services/authService";
 
 const SignUp = ({ setAuthState }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [signUpState, setSignUpState] = useState({
     signUpData: {
       email: "",
@@ -14,8 +14,19 @@ const SignUp = ({ setAuthState }) => {
       last_name: "",
     },
     btnLoader: false,
+    isVerified: false,
   });
 
+  const onChange = (value) => {
+    if (value) {
+      setSignUpState((prevState) => ({
+        ...prevState,
+        isVerified: true,
+      }));
+    }
+
+    console.log("Captcha value:", value);
+  };
   const userSignUp = useCallback(async (signUpDetails) => {
     setSignUpState((prevState) => ({
       ...prevState,
@@ -30,9 +41,9 @@ const SignUp = ({ setAuthState }) => {
         ...prevState,
         btnLoader: false,
       }));
-            navigate({
-              pathname: "/home",
-            });
+      navigate({
+        pathname: "/home",
+      });
       // setAuthState((prevState) => ({
       //   ...prevState,
       //   newAccount: false,
@@ -88,7 +99,7 @@ const SignUp = ({ setAuthState }) => {
               }}
             />
             <input
-              type="text"
+              type="email"
               name="email"
               placeholder="Email"
               autocomplete="off"
@@ -119,10 +130,16 @@ const SignUp = ({ setAuthState }) => {
                 }));
               }}
             />
-
+            <div className="recaptcha-box">
+              <ReCAPTCHA
+                sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+                onChange={onChange}
+              />
+            </div>
 
             <button
               className="btn1"
+              disabled={!signUpState.isVerified}
               type="button"
               onClick={() => {
                 userSignUp(signUpState.signUpData);
@@ -133,7 +150,7 @@ const SignUp = ({ setAuthState }) => {
                   <span className="visually-hidden">Loading...</span>
                 </div>
               ) : (
-                <>Sign Up</>
+                <span>Sign Up</span>
               )}
             </button>
           </form>
@@ -146,7 +163,7 @@ const SignUp = ({ setAuthState }) => {
               }));
             }}
           >
-           Already have an account? Sign in
+            Already have an account? Sign in
           </span>
         </div>
         {/* <div className="footer">

@@ -4,6 +4,7 @@ import { getUser, setUserSession } from "../../helper/storage";
 import {
   uploadProfilePicture,
   signatureUpload,
+  stampUpload,
 } from "../../services/profileService";
 import NavBarHeader from "../CommissionerHome/subComponent/NavHeader";
 
@@ -12,25 +13,14 @@ import "./profile.css";
 const Profile = () => {
   const user = getUser();
   const [signature, setSignature] = useState("");
-  const [signatureBtn, setSignatureBtn] = useState(false);
+  const [btnLoaders, setBtnLoaders] = useState({
+    profileBtn: false,
+    signatureBtn: false,
+    stampBtn: false,
+  });
   console.log(user);
   const [profilePic, setProfilePic] = useState([]);
-
-  // const uploadImage = useCallback(async (image) => {
-  //   const fd = new FormData();
-  //   fd.append("image", image, image.phot_name);
-  //   await uploadProfilePicture(fd)
-  //     .then((res) => {
-  //       toast.success(res?.data.message);
-  //       // getNamesOfImagesToBeUploaded();
-  //     })
-  //     .catch((error) => {
-  //       if (error.response) {
-  //       }
-  //       if (!error.response) {
-  //       }
-  //     });
-  // }, []);
+  const [stamp, setStamp] = useState("");
 
   var imgWidth;
   var imgHeight;
@@ -97,7 +87,10 @@ const Profile = () => {
   }
 
   const updateSignature = useCallback(async (signatureString) => {
-    setSignatureBtn(true);
+    setBtnLoaders((prevState) => ({
+      ...prevState,
+      signatureBtn: true,
+    }));
     const dataToSend = {
       id: user.id,
       signature: signatureString,
@@ -107,15 +100,71 @@ const Profile = () => {
       .then((res) => {
         setUserSession(res.data);
         toast.success("Signature Uploaded Successfully");
-        setSignatureBtn(false);
+        setBtnLoaders((prevState) => ({
+          ...prevState,
+          signatureBtn: false,
+        }));
       })
       .catch((errors) => {
         console.log(errors);
         toast.error("Something went wrong");
-        setSignatureBtn(false);
+        setBtnLoaders((prevState) => ({
+          ...prevState,
+          signatureBtn: false,
+        }));
       });
   }, []);
 
+
+
+
+
+  const updateStamp = useCallback(async (stampString) => {
+    setBtnLoaders((prevState) => ({
+      ...prevState,
+      stampBtn: true,
+    }));
+    const dataToSend = {
+      id: user.id,
+      stamp: stampString,
+    };
+    console.log(dataToSend);
+
+    
+    await stampUpload(dataToSend)
+      .then((res) => {
+        setUserSession(res.data);
+        toast.success("Stamp Uploaded Successfully");
+        setBtnLoaders((prevState) => ({
+          ...prevState,
+          stampBtn: false,
+        }));
+      })
+      .catch((errors) => {
+        console.log(errors);
+        toast.error("Something went wrong");
+        setBtnLoaders((prevState) => ({
+          ...prevState,
+          stampBtn: false,
+        }));
+      });
+  }, []);
+
+
+
+
+
+  const convert2base64 = (e) => {
+    console.log(e.target);
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setStamp(reader.result.toString());
+      console.log(reader.result.toString())
+    };
+    reader.readAsDataURL(file);
+  };
 
   return (
     <div className="profile">
@@ -181,12 +230,55 @@ const Profile = () => {
                   }}
                 >
                   {" "}
-                  {signatureBtn ? (
+                  {btnLoaders.signatureBtn ? (
                     <div class="spinner-border text-light" role="status">
                       <span class="visually-hidden">Loading...</span>
                     </div>
                   ) : (
                     <span> {signature ? "Upload Signature" : "Sign"} </span>
+                  )}
+                </button>
+              </div>
+            </div>
+            <div className="card mt-4 mb-xl-0">
+              <div className="card-header">Add Stamp</div>
+              <div className="card-body text-center">
+                <div className="small font-italic text-muted mb-4">
+                  {/* <!-- Profile picture upload button--> */}
+
+                  <div>
+                  <img
+                    src={`${stamp}`}
+                    alt=""
+                    width="150"
+                  />
+                  </div>
+
+                  <input
+                    type="file"
+                    className="btn "
+                    accept="image/png, image/jpeg"
+                    onChange={(e) => {
+                      convert2base64(e);
+                      console.log(e.target.value);
+                    }}
+                  />
+                </div>
+                <button
+                  className="btn btn-primary"
+                  disabled={!stamp}
+                  type="button"
+                  onClick={() => {
+                    updateStamp(stamp)
+                  }}
+                >
+                  {" "}
+                  {btnLoaders.stampBtn ? (
+                    <div class="spinner-border text-light" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  ) : (
+                    <span>Upload Stamp </span>
                   )}
                 </button>
               </div>

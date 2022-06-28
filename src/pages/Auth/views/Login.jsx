@@ -15,9 +15,12 @@ const Login = ({ setAuthState }) => {
     },
     btnLoader: false,
     isVerified: false,
+    failedLogin: 0,
   });
 
+  console.log(loginState);
   const userLogin = useCallback(async (loginDetails) => {
+    console.log(loginState);
     setLoginState((prevState) => ({
       ...prevState,
       btnLoader: true,
@@ -36,6 +39,13 @@ const Login = ({ setAuthState }) => {
         pathname: "/home",
       });
     } catch (errors) {
+      if (errors?.response?.data?.detail === "Invalid Login Credentials") {
+        console.log("hey");
+        setLoginState((prevState) => ({
+          ...prevState,
+          failedLogin: prevState.failedLogin + 1,
+        }));
+      }
       setLoginState((prevState) => ({
         ...prevState,
         btnLoader: false,
@@ -48,14 +58,14 @@ const Login = ({ setAuthState }) => {
     if (value) {
       setLoginState((prevState) => ({
         ...prevState,
-        isVerified: true,
+        failedLogin: 0,
       }));
     }
 
     console.log("Captcha value:", value);
   };
   return (
-    <div classNameName="auth">
+    <div className="auth">
       <div id="particles-js"></div>
       <div className="animated bounceInDown">
         <div className="container-box">
@@ -108,17 +118,18 @@ const Login = ({ setAuthState }) => {
               Forget Password?
             </a>
 
-            <div classNameName="recaptcha-box">
-              <ReCAPTCHA
-                sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
-                onChange={onChange}
-              />
-            </div>
-
+            {loginState.failedLogin >= 3 && (
+              <div classNameName="recaptcha-box">
+                <ReCAPTCHA
+                  sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+                  onChange={onChange}
+                />
+              </div>
+            )}
             <button
               className="btn1"
               type="button"
-              disabled={!loginState.isVerified}
+              disabled={loginState.failedLogin >= 3}
               onClick={() => {
                 userLogin(loginState.loginData);
               }}
@@ -159,85 +170,3 @@ const Login = ({ setAuthState }) => {
 };
 
 export default Login;
-
-// <div className="auth text-center">
-//   <main className="form-signin  m-auto">
-//     <form>
-//       <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
-
-//       <div className="form-floating">
-//         <input
-//           type="email"
-//           placeholder="Email"
-//           required=""
-//           className="form-control"
-//           onChange={(e) => {
-//             setLoginState((prevState) => ({
-//               ...prevState,
-//               loginData: {
-//                 ...prevState.loginData,
-//                 email: e.target.value,
-//               },
-//             }));
-//           }}
-//         />
-//         <label for="floatingInput">Email address</label>
-//       </div>
-//       <div className="form-floating">
-//         <input
-//           type="password"
-//           name="pswd"
-//           className="form-control"
-//           placeholder="Password"
-//           required=""
-//           onChange={(e) => {
-//             setLoginState((prevState) => ({
-//               ...prevState,
-//               loginData: {
-//                 ...prevState.loginData,
-//                 password: e.target.value,
-//               },
-//             }));
-//           }}
-//         />
-//         <label for="floatingPassword">Password</label>
-//       </div>
-
-//       <div className="checkbox mb-3">
-//         <label>
-//           <input type="checkbox" value="remember-me" /> Remember me
-//         </label>
-//       </div>
-//       <button
-//         className="w-100 btn btn-lg btn-primary"
-//         type="button"
-//         onClick={() => {
-//           userLogin(loginState.loginData);
-//         }}
-//       >
-//         {loginState.btnLoader ? (
-//           <div className="spinner-border text-light" role="status">
-//             <span className="visually-hidden">Loading...</span>
-//           </div>
-//         ) : (
-//           <>Sign in</>
-//         )}
-//       </button>
-//       <p>
-//         Don't have an account,{" "}
-//         <span
-//           onClick={() => {
-//             setAuthState((prevState) => ({
-//               ...prevState,
-//               newAccount: true,
-//             }));
-//           }}
-//           classNameName="text-primary new-account"
-//         >
-//           Create One
-//         </span>
-//       </p>
-//       <p className="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
-//     </form>
-//   </main>
-// </div>;

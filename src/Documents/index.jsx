@@ -16,7 +16,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import FieldSection from "./subComponent/FieldSection";
 import HomeNavHeader from "../Home/subComponent/HomeNavHeader";
 
-const LossOfDocuments = () => {
+const Documents = () => {
   const user = getUser();
   let { id } = useParams();
 
@@ -136,10 +136,11 @@ const LossOfDocuments = () => {
 
   return (
     <div className="documents ">
+      <HomeNavHeader />
       <div className="row">
         <div className="col-md-8">
           <TestDocument {...documentVariables} />
-          {/* <div className="row">
+          <div className="row">
             <div className="col-md-6 text-center">
               <button
                 className="btn btn-dark w-50"
@@ -167,7 +168,7 @@ const LossOfDocuments = () => {
                 Check Out
               </button>
             </div>
-          </div> */}
+          </div>
         </div>
         <div className="col-md-4">
           <FieldSection
@@ -181,4 +182,4 @@ const LossOfDocuments = () => {
   );
 };
 
-export default LossOfDocuments;
+export default Documents;

@@ -31,12 +31,6 @@ const HomeNavHeader = () => {
             <img src={Profile} alt="" width="40" />
           </DropdownToggle>
           <DropdownMenu className="dropdown-container">
-            {/* <DropdownItem
-              className="dropdown-item"
-              onClick={() => navigate("/updateProfile")}
-            >
-              Profile
-            </DropdownItem> */}
             <DropdownItem
               className="dropdown-item"
               onClick={() => navigate("/auth")}

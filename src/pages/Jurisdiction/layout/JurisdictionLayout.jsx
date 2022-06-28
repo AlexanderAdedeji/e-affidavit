@@ -7,6 +7,7 @@ const JurisdictionLayout = ({
   jurisdictionState,
   setJurisdictionState,
   id,
+
 }) => {
   return (
     <div id="jurisdiction-layout">
@@ -20,6 +21,7 @@ const JurisdictionLayout = ({
           jurisdictionState={jurisdictionState}
           setJurisdictionState={setJurisdictionState}
           id={id}
+   
         />
       </div>
     </div>

@@ -1,10 +1,11 @@
 import { useState, useCallback } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { setUserSession } from "../../helper/storage";
 import { commisionerLogin } from "../../services/commissionerService";
 
-const CommissionerSignIn = ({ setAuthState }) => {
+const CommissionerSignIn = () => {
   let navigate = useNavigate();
 
   const [loginState, setLoginState] = useState({
@@ -13,6 +14,7 @@ const CommissionerSignIn = ({ setAuthState }) => {
       password: "",
     },
     btnLoader: false,
+    isVerified: false,
   });
 
   const userLogin = useCallback(async (loginDetails) => {
@@ -41,6 +43,17 @@ const CommissionerSignIn = ({ setAuthState }) => {
     }
   }, []);
 
+  const onChange = (value) => {
+    if (value) {
+      setLoginState((prevState) => ({
+        ...prevState,
+        isVerified: true,
+      }));
+    }
+
+    console.log("Captcha value:", value);
+  };
+
   return (
     <div className="auth">
       <div id="particles-js"></div>
@@ -49,7 +62,7 @@ const CommissionerSignIn = ({ setAuthState }) => {
           <span class="error animated tada" id="msg"></span>
           <form name="form1" class="box">
             <h4 className="">
-              Welcome <span>Back!</span>
+              Welcome <span>Commissioner!</span>
             </h4>
             <h5>Sign in to your account.</h5>
             <input
@@ -92,8 +105,14 @@ const CommissionerSignIn = ({ setAuthState }) => {
             <a href="#" class="forgetpass">
               Forget Password?
             </a>
-
+            <div className="recaptcha-box my-3">
+              <ReCAPTCHA
+                sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+                onChange={onChange}
+              />
+            </div>
             <button
+              disabled={!loginState.isVerified}
               class="btn1"
               type="button"
               onClick={() => {

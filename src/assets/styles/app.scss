@@ -4,19 +4,24 @@
 @import "./pages/auth";
 @import "./pages/profile";
 @import "./pages/home";
-@import "./pages/document";
+@import "./pages/template-documents";
 @import "./pages/paymentAcknowledgement";
 @import "./pages/signUpAuth";
 @import "./pages/landingPage";
 @import "./pages/jurisdiction";
+@import "./pages/documentsDisplayContainer";
 
 @import "./pages/commissionerHome";
+@import "./pages/checkout";
+@import "./pages/verifierHome";
 
 @import "./component/header";
 @import "./component/dropdown";
 @import "./component/defaultHeader";
 @import "./component/form";
 @import "./component/nofile";
+@import "./component/templateCard";
+
 
 @import "./component/navHeader";
 

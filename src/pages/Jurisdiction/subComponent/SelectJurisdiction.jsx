@@ -1,22 +1,20 @@
-import {  useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 import SelectDropDown from "../../../component/SelectDropdown";
-import Back from "../../../assets/images/back.svg"
+import Back from "../../../assets/images/back.svg";
 
 const SelectJurisdiction = ({
   id,
   jurisdictionState,
   setJurisdictionState,
-}) => {
 
-  const navigate =useNavigate()
+}) => {
+  const navigate = useNavigate();
   return (
     <div className="select-jurisdiction">
-      <div className="go-back" onClick={()=>navigate("/home")}>
-
-          <img src={Back} alt="" />
-          <span>Go back</span>
-   
+      <div className="go-back" onClick={() => navigate("/home")}>
+        <img src={Back} alt="" />
+        <span>Go back</span>
       </div>
       <div id="form-body">
         <div className="mb-3 form-field">
@@ -127,9 +125,11 @@ const SelectJurisdiction = ({
         <div>
           <button
             onClick={() => {
-              navigate(`/document/${id}`, { state: jurisdictionState });
+              navigate(`/document/${id}`, {
+                state: { ...jurisdictionState, id },
+              });
             }}
-        className="btn btn-dark my-4"
+            className="btn btn-dark my-4"
           >
             Next
           </button>
