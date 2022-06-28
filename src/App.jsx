@@ -23,6 +23,7 @@ import DocumentDisplayContainer from "./pages/DocumentsDisplayContainer";
 import LossOfDocuments from "./DocumentsTemplates/LossOfDocuments";
 import ChangeOfName from "./DocumentsTemplates/ChangeOfName";
 import VerifierSignIn from "./pages/verifierSignIn";
+import QRDocumentSearch from "./pages/QRDocumentSearch";
 
 function App() {
   useEffect(() => {
@@ -51,6 +52,10 @@ function App() {
         <Route path="/commissionerHome" element={<CommissionerHome />} />
         <Route path="/verifierHome" element={<VerifierHome />} />
         <Route path="/verifierLogin" element={<VerifierSignIn />} />
+        <Route
+          path="/qr-searchDocument/:documentRef"
+          element={<QRDocumentSearch />}
+        />
         <Route
           path="/paymentAcknowledgement"
           element={<PaymentAcknowledgement />}
