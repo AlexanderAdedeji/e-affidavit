@@ -56,7 +56,7 @@ const VerifierSignIn = () => {
 
   return (
     <div className="auth">
-      <div id="particles-js"></div>
+  
       <div class="animated bounceInDown">
         <div class="container-box">
           <span class="error animated tada" id="msg"></span>

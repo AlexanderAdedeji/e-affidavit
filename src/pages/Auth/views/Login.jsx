@@ -66,7 +66,7 @@ const Login = ({ setAuthState }) => {
   };
   return (
     <div className="auth">
-      <div id="particles-js"></div>
+
       <div className="animated bounceInDown">
         <div className="container-box">
           <span className="error animated tada" id="msg"></span>

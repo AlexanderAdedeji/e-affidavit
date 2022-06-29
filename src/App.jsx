@@ -24,6 +24,7 @@ import LossOfDocuments from "./DocumentsTemplates/LossOfDocuments";
 import ChangeOfName from "./DocumentsTemplates/ChangeOfName";
 import VerifierSignIn from "./pages/verifierSignIn";
 import QRDocumentSearch from "./pages/QRDocumentSearch";
+import MyDocuments from "./pages/MyDocuments";
 
 function App() {
   useEffect(() => {
@@ -36,6 +37,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
 
         <Route path="/auth" element={<Auth />} />
+        <Route path="/my-documents" element={<MyDocuments />} />
         <Route path="/home" element={<Home />} />
         <Route path="/updateProfile" element={<Profile />} />
         {/* <Route path="/document/:id" element={<Documents />} /> */}

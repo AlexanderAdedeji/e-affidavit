@@ -58,7 +58,7 @@ const SignUp = ({ setAuthState }) => {
   }, []);
   return (
     <div id="signUpAuth">
-      <div id="particles-js"></div>
+
       <div className="animated bounceInDown">
         <div className="container-box">
           <span className="error animated tada" id="msg"></span>
