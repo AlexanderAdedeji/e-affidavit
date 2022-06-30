@@ -67,7 +67,7 @@ const PaymentAcknowledgement = () => {
             navigate("/home");
           }}
         >
-          Go Home
+          Go Back
         </button>
       </div>
     </div>

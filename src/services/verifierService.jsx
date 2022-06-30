@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const verifierLogin = async (data) => {
   return await axios.post(
-    `${process.env.REACT_APP_BASE_URL}commissioner/commissioner_login`,
+    `${process.env.REACT_APP_BASE_URL}verifier/verifier_login`,
     data
   );
 };

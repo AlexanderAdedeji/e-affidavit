@@ -128,3 +128,5 @@ export const BusinessAffidavit = [
     price: "1300",
   },
 ];
+
+

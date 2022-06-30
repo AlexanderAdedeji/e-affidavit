@@ -28,7 +28,7 @@ const VerifierSignIn = () => {
       console.log(data);
       setUserSession(data);
       navigate({
-        pathname: "/commissionerHome",
+        pathname: "/verifierHome",
       });
       setLoginState((prevState) => ({
         ...prevState,

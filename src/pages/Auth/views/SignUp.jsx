@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useCallback } from "react";
 import { toast } from "react-toastify";
 import { login, signUp } from "../../../services/authService";
+import { setUserSession } from "../../../helper/storage";
 
 const SignUp = ({ setAuthState }) => {
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ const SignUp = ({ setAuthState }) => {
       const { data } = await signUp(signUpDetails);
       console.log(data);
 
+      setUserSession(data);
       toast.success("You have been created Successfully");
       setSignUpState((prevState) => ({
         ...prevState,
@@ -58,7 +60,6 @@ const SignUp = ({ setAuthState }) => {
   }, []);
   return (
     <div id="signUpAuth">
-
       <div className="animated bounceInDown">
         <div className="container-box">
           <span className="error animated tada" id="msg"></span>

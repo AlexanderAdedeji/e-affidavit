@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useState, createContext } from "react";
 
 export const HomeContext = createContext({
@@ -17,6 +18,15 @@ export const HomeProvider = ({ children }) => {
     setSearchKeyWord("")
     setHeaderTab(tab);
   };
+
+
+
+
+  useEffect(()=>{
+    if(searchKeyWord){
+      setHeaderTab("search")
+    }
+  },[searchKeyWord])
   const searchItemsArr = (keyword, itemsArr) => {
     return itemsArr.filter((items) =>
       items.name.toLowerCase().includes(keyword.toLowerCase())

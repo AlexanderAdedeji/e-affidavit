@@ -43,7 +43,13 @@ const CommissionerHome = () => {
   const appendSignature = (userData) => {
     if (userData.signature === null || userData.signature === "") {
       console.log("here");
-      toast.error("Head to your profile to Upload Signature");
+      // toast.error("Head to your profile to Upload Signature");
+
+      Swal.fire(
+        "Warning",
+        "There is no signature on your profile,<br/> Please do head to your profile to upload your signture",
+        "info"
+      );
       return;
     }
 
@@ -54,9 +60,12 @@ const CommissionerHome = () => {
   };
 
   const appendStamp = (userData) => {
-    if (userData.signature === null || userData.signature === "") {
-      console.log("here");
-      toast.error("Head to your profile to Upload Signature");
+    if (userData.stamp === null || userData.stamp === "") {
+      Swal.fire(
+        "Warning",
+        "There is no stamp on your profile,<br/> Please do head to your profile to upload your stamp",
+        "info"
+      );
       return;
     }
 

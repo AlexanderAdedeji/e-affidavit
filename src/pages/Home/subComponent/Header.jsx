@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <div id="header">
       <div id="top">
-        <h4>Categories</h4>
+        <h4>Affidavit Categories</h4>
 
         <div className="filter-by-container d-flex">
           <input
@@ -53,6 +53,16 @@ const Header = () => {
           >
             Business
           </span>
+          {headerTab === "search" && (
+            <span
+              className={`header-tab ${headerTab === "search" && "active"}`}
+              onClick={() => {
+                updateHeaderTab("search");
+              }}
+            >
+              Search
+            </span>
+          )}
         </div>
 
         {/* <div className="right mb-2">
