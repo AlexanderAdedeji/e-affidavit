@@ -6,6 +6,7 @@ import Property from "../views/Property";
 import Business from "../views/Business";
 import { useContext } from "react";
 import { HomeContext } from "../context/Homecontext";
+import Search from "../views/Search";
 
 const HomeLayout = () => {
   const { headerTab } = useContext(HomeContext);
@@ -18,6 +19,7 @@ const HomeLayout = () => {
         {headerTab === "personal" && <NameChange />}
         {headerTab === "property" && <Property />}
         {headerTab === "business" && <Business />}
+        {headerTab === "search" && <Search />}
       </div>
     </div>
   );

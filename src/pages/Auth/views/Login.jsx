@@ -28,7 +28,6 @@ const Login = ({ setAuthState }) => {
     console.log(loginDetails);
     try {
       const { data } = await login(loginDetails);
-      toast.success("You have been created Successfully");
       console.log(data);
       setUserSession(data);
       setLoginState((prevState) => ({
@@ -36,7 +35,7 @@ const Login = ({ setAuthState }) => {
         btnLoader: false,
       }));
       navigate({
-        pathname: "/home",
+        pathname: "/my-documents",
       });
     } catch (errors) {
       if (errors?.response?.data?.detail === "Invalid Login Credentials") {

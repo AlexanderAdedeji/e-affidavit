@@ -1,5 +1,7 @@
 .my-documents{
-    border:1px solid red;
+  .my-documents-header{
+    min-height: 100px;
+  }
 .my-documents-body{
     padding: 10px 40px;
 }

@@ -80,7 +80,7 @@ export const DocumentDisplayProvider = ({ children }) => {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        navigate("/home");
+        navigate("/my-documents");
       }
       if (result.isDenied) {
         navigate("/checkout");

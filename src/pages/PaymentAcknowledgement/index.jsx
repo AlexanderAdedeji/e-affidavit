@@ -64,7 +64,7 @@ const PaymentAcknowledgement = () => {
         <button
           className="btn btn-dark noprint"
           onClick={() => {
-            navigate("/home");
+            navigate("/my-documents");
           }}
         >
           Go Back

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import TemplateCard from "../subComponent/TemplateCard";
-import { PropertyAffidavit, PersonalAffidavit } from "../../../affidavit";
+import { PropertyAffidavit, personalAffidavit } from "../../../affidavit";
 import { useContext } from "react";
 import { HomeContext } from "../context/Homecontext";
 
@@ -8,12 +8,14 @@ const Search = () => {
   const { searchKeyWord, searchItemsArr } = useContext(HomeContext);
   const [affidavitList, setAffidavitList] = useState([
     ...PropertyAffidavit,
-    ...PersonalAffidavit,
+    ...personalAffidavit,
   ]);
+  console.log(affidavitList)
   const [filteredAffidavits, setFilteredAffidavit] =
-    useState([...PropertyAffidavit,...PersonalAffidavit]);
+    useState([...PropertyAffidavit,...personalAffidavit]);
 
   useEffect(() => {
+    console.log(affidavitList)
     const newList = searchItemsArr(searchKeyWord, affidavitList);
     setFilteredAffidavit(newList);
   }, [searchKeyWord]);

@@ -6,7 +6,7 @@ const Header = () => {
 
   const navigateHandler = () => navigate("/home");
   return (
-    <div id="header" className="w-100">
+    <div id="header" className="w-100 my-documents-header">
       <div id="top">
         <h4>My Documents</h4>
 

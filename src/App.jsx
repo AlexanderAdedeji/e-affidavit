@@ -25,6 +25,7 @@ import ChangeOfName from "./DocumentsTemplates/ChangeOfName";
 import VerifierSignIn from "./pages/verifierSignIn";
 import QRDocumentSearch from "./pages/QRDocumentSearch";
 import MyDocuments from "./pages/MyDocuments";
+import ViewMyDocuments from "./pages/ViewMyDocuments.tsx";
 
 function App() {
   useEffect(() => {
@@ -54,6 +55,7 @@ function App() {
         <Route path="/commissionerHome" element={<CommissionerHome />} />
         <Route path="/verifierHome" element={<VerifierHome />} />
         <Route path="/verifierLogin" element={<VerifierSignIn />} />
+        <Route path="/view-myDocuments" element={<ViewMyDocuments />} />
         <Route
           path="/qr-searchDocument/:documentRef"
           element={<QRDocumentSearch />}

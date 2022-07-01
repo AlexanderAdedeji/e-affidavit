@@ -44,7 +44,7 @@ const SignUp = ({ setAuthState }) => {
         btnLoader: false,
       }));
       navigate({
-        pathname: "/home",
+        pathname: "/my-documents",
       });
       // setAuthState((prevState) => ({
       //   ...prevState,

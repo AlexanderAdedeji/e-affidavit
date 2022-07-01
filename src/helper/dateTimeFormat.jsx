@@ -160,3 +160,72 @@ export const FullsetTime = (i) => {
 //   Array.from({ length: (2022 - start) / step + 1 }, (_, i) => start + i * step);
 
 // }
+
+
+
+export const complexDateTimeFormatter = (rawDate) => {
+  let check = rawDate?.replace(" ", "T");
+  let wow = new Date(Date.parse(rawDate));
+
+
+  const day = wow.getDate();
+  const month = wow.getMonth();
+  console.log(month)
+
+  const year = wow.getFullYear();
+  let stringedMonth;
+
+  switch (month) {
+    case 0:
+      stringedMonth = "Jan";
+      break;
+    case 1:
+      stringedMonth = "Feb";
+      break;
+    case 2:
+      stringedMonth = "Mar";
+      break;
+    case 3:
+      stringedMonth = "Apr";
+      break;
+    case 4:
+      stringedMonth = "May";
+      break;
+    case 5:
+      stringedMonth = "Jun";
+      break;
+    case 6:
+      stringedMonth = "Jul";
+      break;
+    case 7:
+      stringedMonth = "Aug";
+      break;
+    case 8:
+      stringedMonth = "Sep";
+      break;
+    case 9:
+      stringedMonth = "Oct";
+      break;
+    case 10:
+      stringedMonth = "Nov";
+      break;
+    case 11:
+      stringedMonth = "Dec";
+      break;
+    default:
+      stringedMonth = "";
+  }
+
+  let time = wow.toLocaleString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  });
+
+  return {
+    formatedDay: checkDate(day),
+    formatedMonth: stringedMonth,
+    formattedYear: year,
+    formattedTime: time,
+  };
+};
