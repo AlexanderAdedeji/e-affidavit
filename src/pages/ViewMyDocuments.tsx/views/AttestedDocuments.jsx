@@ -11,15 +11,17 @@ const AttestedDocuments = ({ id }) => {
   useEffect(() => {
     getDocument();
   }, []);
+  
 
   const getDocument = async () => {
     setLoading(true);
     await fetchAttestedDocument(id)
       .then((res) => {
         console.log(res);
-        setLoading(false);
+        
         document.getElementById("attest-documents").innerHTML =
           res.data.document;
+          setLoading(false);
       })
       .catch((errors) => {
         setLoading(false);

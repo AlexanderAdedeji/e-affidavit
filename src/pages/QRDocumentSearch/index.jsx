@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import NoFile from "../../component/NoFile";
 import QRDocumentSearchNavHeader from "./subComponent/QRDocumentSearchNavHeader";
 import DocumentLoader from "../../component/Spinner/DocumentLoader";
+import PageLoader from "../../component/Spinner/PageLoader";
 
 const QRDocumentSearch = () => {
   const { documentRef } = useParams();
@@ -53,7 +54,7 @@ const QRDocumentSearch = () => {
       <QRDocumentSearchNavHeader />
 
       <div id="verified-document" className="mt-3">
-        {verifierState.loading ? <DocumentLoader /> : <NoFile />}
+        {verifierState.loading ? <PageLoader /> : <NoFile />}
       </div>
     </div>
   );
