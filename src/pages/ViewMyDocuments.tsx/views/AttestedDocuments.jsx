@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import PageLoader from "../../../component/Spinner/PageLoader";
 import BigCardLoader from "../../../Loaders/BigCardLoader";
 import { commisionerLogin } from "../../../services/commissionerService";
 import { fetchAttestedDocument } from "../../../services/verifierService";
@@ -17,23 +18,15 @@ const AttestedDocuments = ({ id }) => {
       .then((res) => {
         console.log(res);
         setLoading(false);
-        document.getElementById("attest-documents").innerHTML = res.data.document;
-      
+        document.getElementById("attest-documents").innerHTML =
+          res.data.document;
       })
       .catch((errors) => {
         setLoading(false);
       });
   };
   return (
-    <div>
-      {loading ? (
-        <BigCardLoader />
-      ) : (
-        <div id="attest-documents">
-        
-        </div>
-      )}
-    </div>
+    <div>{loading ? <PageLoader /> : <div id="attest-documents"></div>}</div>
   );
 };
 

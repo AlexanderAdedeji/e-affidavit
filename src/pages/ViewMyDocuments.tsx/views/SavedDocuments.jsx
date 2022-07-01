@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from "react";
+import PageLoader from '../../../component/Spinner/PageLoader';
 import LossOfDocumentTemplate from "../../../DocumentsTemplates/LossOfDocuments/subComponent/LossOfDocumentTemplate";
 import BigCardLoader from "../../../Loaders/BigCardLoader";
 import { fetchDocument } from "../../../services/commissionerService";
@@ -69,7 +70,7 @@ const SavedDocuments = ({id}) => {
       };
   return (
     <div className='documents'>
-        {loading? <BigCardLoader/> :
+        {loading? <PageLoader/> :
 
         <>
       <div className="row">
