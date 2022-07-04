@@ -173,38 +173,38 @@ const CommissionerHome = () => {
             {documentTemplate === "nameChange" && <ChangeOfName />}
           </div>
           <div className="col-md-3 noprint  mb-3">
-            {!signature.deponentSignature && (
-              <div className="text-center">
-                <button
-                  className="mx-3 btn btn-dark w-75"
-                  disabled={false}
-                  onClick={deponentSignHandler}
-                >
-                  Deponent Sign
-                </button>
-              </div>
-            )}
-            {signature.deponentSignature && !signature.commissionerSignature && (
-              <div className="mt-3">
-                <SelectDropDown>
-                  <DropdownToggle color="" className="border px-3" caret>
-                    <span className="pr-5">Commissioner Signature</span>
-                  </DropdownToggle>
-                  <DropdownMenu className="dropdown-container">
-                    <DropdownItem onClick={commissionerSignHandler}>
-                      Sign
-                    </DropdownItem>
-                    <DropdownItem
-                      onClick={() => {
-                        appendSignature(user);
-                      }}
-                    >
-                      Append Signature
-                    </DropdownItem>
-                  </DropdownMenu>
-                </SelectDropDown>
-              </div>
-            )}
+            {/* {!signature.deponentSignature && ( */}
+            <div className="text-center">
+              <button
+                className="mx-3 btn btn-dark w-75"
+                disabled={false}
+                onClick={deponentSignHandler}
+              >
+                Deponent Sign
+              </button>
+            </div>
+            {/* )} */}
+            {/* {signature.deponentSignature && !signature.commissionerSignature && ( */}
+            <div className="mt-3">
+              <SelectDropDown>
+                <DropdownToggle color="" className="border px-3" caret>
+                  <span className="pr-5">Commissioner Signature</span>
+                </DropdownToggle>
+                <DropdownMenu className="dropdown-container">
+                  <DropdownItem onClick={commissionerSignHandler}>
+                    Sign
+                  </DropdownItem>
+                  <DropdownItem
+                    onClick={() => {
+                      appendSignature(user);
+                    }}
+                  >
+                    Append Signature
+                  </DropdownItem>
+                </DropdownMenu>
+              </SelectDropDown>
+            </div>
+            {/* )} */}
 
             {signature.commissionerSignature &&
               signature.deponentSignature &&
