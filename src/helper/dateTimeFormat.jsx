@@ -74,9 +74,9 @@ const checkDate = (date) => {
   let stringDate = date.toString();
   if (stringDate.slice(-1) === "1") {
     return `${date}st`;
-  } else if (stringDate.slice(-1) === "2") {
+  } else if (stringDate.slice(-1) === "2" && stringDate.length !== 2) {
     return `${date}nd`;
-  } else if (stringDate.slice(-1) === "3") {
+  } else if (stringDate.slice(-1) === "3" && stringDate.length !== 2) {
     return `${date}rd`;
   } else if (stringDate ==="11"){
      return `${date}th`;

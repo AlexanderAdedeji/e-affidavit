@@ -5,6 +5,7 @@ import { getUser } from "../../helper/storage";
 const PaymentAcknowledgement = () => {
   const user = getUser();
   const location = useLocation();
+  console.log(location.state)
   const navigate = useNavigate()
   console.log(location)
 

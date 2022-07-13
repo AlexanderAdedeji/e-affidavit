@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useEffect } from "react";
 import { useState, createContext } from "react";
 
@@ -20,7 +21,8 @@ export const CommissionerProvider = ({ children }) => {
     deponentSignature: "",
   });
   const [stamp, setStamp] = useState("");
-  const [whoIsSigning, setWhoIsSigning] = useState("");
+  const [whoIsSigning, _setWhoIsSigning] = useState("");
+  const whoIsSigningRef = useRef(whoIsSigning)
 
   useEffect(() => {
     document.removeEventListener("SignResponse", console.log("done"), false);
@@ -29,6 +31,11 @@ export const CommissionerProvider = ({ children }) => {
       StartSign();
     }
   }, [whoIsSigning]);
+
+  const setWhoIsSigning= (who) =>{
+    whoIsSigningRef.current =who
+    _setWhoIsSigning(who)
+  }
 
   const StartSign = () => {
     console.log("startSignIn");
@@ -77,6 +84,7 @@ export const CommissionerProvider = ({ children }) => {
 
   function SetValues(objResponse) {
     debugger;
+    console.log(whoIsSigningRef)
     console.log({ whoIsSigning }, "values");
     var obj = null;
     if (typeof objResponse === "string") {
@@ -92,10 +100,18 @@ export const CommissionerProvider = ({ children }) => {
       alert(obj.errorMsg);
     } else {
       if (obj.isSigned) {
-        setSignature((prevState) => ({
-          ...prevState,
-          deponentSignature: obj.imageData,
-        }));
+        if(whoIsSigningRef.current === 'DEPONENT'){
+          setSignature((prevState) => ({
+            ...prevState,
+            deponentSignature: obj.imageData,
+          }));
+        }else if(whoIsSigningRef.current === 'COMMISSIONER'){
+          setSignature((prevState) => ({
+            ...prevState,
+            commissionerSignature: obj.imageData,
+          }));
+        }
+
       }
     }
   }
