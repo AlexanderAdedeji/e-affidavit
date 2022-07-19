@@ -1,9 +1,8 @@
 import React from "react";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
-
-    const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <div className="landingPage img js-fullheight">
       <section className="ftco-section">
@@ -26,9 +25,9 @@ const LandingPage = () => {
                 <div className="social d-flex text-center">
                   <a
                     className="px-2 py-2 mr-md-1 rounded redirect-a"
-                    style={{ textDecoration: "none", cursor:"pointer" }}
-                    onClick={()=>{
-                        navigate("/auth")
+                    style={{ textDecoration: "none", cursor: "pointer" }}
+                    onClick={() => {
+                      navigate("/auth");
                     }}
                   >
                     Get Started
@@ -39,6 +38,18 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
+
+      <div style={{
+        position:"absolute",
+        right:"30px",
+        bottom:"10px"
+      }}>
+        <iframe
+          src="https://webchat.botframework.com/embed/alex-restaurant-kb-bot?s=yI2pod5nu8s._Mrg51WFXWgHDWGlp9LUo0uDAfsA2zXEfm4n1EHZmz0"
+ 
+          style={{minWidth:"300px", width:"100%", minHeight:"300px"}}
+        ></iframe>
+      </div>
     </div>
   );
 };
