@@ -105,14 +105,14 @@ const CommissionerSignIn = () => {
             <a href="#" class="forgetpass">
               Forget Password?
             </a>
-            <div className="recaptcha-box my-3">
+            {/* <div className="recaptcha-box my-3">
               <ReCAPTCHA
                 sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
                 onChange={onChange}
               />
-            </div>
+            </div> */}
             <button
-              disabled={!loginState.isVerified}
+              // disabled={!loginState.isVerified}
               class="btn1"
               type="button"
               onClick={() => {

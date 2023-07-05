@@ -125,7 +125,7 @@ const Profile = () => {
       stampBtn: true,
     }));
     const dataToSend = {
-      id: user.id,
+      id: user?.id,
       stamp: stampString,
     };
     console.log(dataToSend);
