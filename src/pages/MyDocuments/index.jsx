@@ -26,7 +26,7 @@ console.log(user)
     try {
       const { data } = await myDocumentsAPI(user.id);
     
-      // setSavedDocuments(data)
+      setSavedDocuments(data)
       setMyDocumentState((prevState) => ({
         ...prevState,
         loading: false,
