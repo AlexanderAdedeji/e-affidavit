@@ -10,7 +10,7 @@ import LossOfDocumentTemplate from "./subComponent/LossOfDocumentTemplate";
 
 const LossOfDocuments = () => {
   const location = useLocation();
-  console.log(location);
+
   const navigate = useNavigate();
   const { id } = useParams();
   const user = getUser();
@@ -39,7 +39,7 @@ const LossOfDocuments = () => {
   });
 
   const convert2base64 = (e) => {
-    console.log(e.target);
+    
     const file = e.target.files[0];
     const reader = new FileReader();
 

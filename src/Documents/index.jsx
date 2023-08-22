@@ -22,7 +22,7 @@ const Documents = () => {
 
   let navigate = useNavigate();
   const location = useLocation();
-  console.log(location.state);
+
 
   const [documentState, setDocumentState] = useState({
     saveBtnLoader: false,
@@ -75,7 +75,7 @@ const Documents = () => {
       ...prevState,
       saveBtn: true,
     }));
-    console.log(data.deponentImage.split(",")[1])
+
     const dataToSend = {
       user_id: user.id,
       document_category_id: id,
@@ -97,7 +97,7 @@ const Documents = () => {
     };
     await saveDocumentsAPI(dataToSend)
       .then((res) => {
-        console.log(res);
+      
         toast.success("Document Saved Successfully");
         Swal.fire("Saved!", "", "success");
         setDocumentState((prevState) => ({
@@ -120,7 +120,7 @@ const Documents = () => {
   }, []);
 
   const convert2base64 = (e) => {
-    console.log(e.target)
+   
     const file = e.target.files[0];
     const reader = new FileReader();
 

@@ -21,7 +21,7 @@ const FieldSection = ({
         id="fileupload"
           type="file"
           className="plain-input form-control"
-          onChange={(e) => {convert2base64(e); console.log(e.target.value)}}
+          onChange={(e) => {convert2base64(e); }}
         />
       </div>
       <div className="mb-3 form-field">

@@ -6,7 +6,7 @@ import ChangeOfTemplateFields from "./subComponent/ChangeOfTemplateFields";
 
 const ChangeOfName = () => {
   const location = useLocation();
-  console.log(location);
+
 
   const [documentVariables, setDocumentVariables] = useState({
     deponentImage:"",
