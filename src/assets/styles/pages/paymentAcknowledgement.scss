@@ -1,0 +1,32 @@
+.payment-acknowledgement {
+  width: 100%;
+  padding: 70px;
+  background-color: #fff;
+  margin: 30px;
+  border-radius: 10px;
+
+  h4 {
+    font-family: "Plus Jakarta Display";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 120%;
+    color: #14213d;
+  }
+
+  p {
+    font-family: "Plus Jakarta Text";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 120%;
+    color: #14213d;
+  }
+}
+
+@media print {
+  .noprint {
+
+    display: none !important;
+  }
+}

@@ -1,0 +1,58 @@
+@import url("https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/plus-jakarta-display.min.css");
+@import url("https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/plus-jakarta-text.min.css");
+
+@import "./pages/auth";
+@import "./pages/profile";
+@import "./pages/home";
+@import "./pages/template-documents";
+@import "./pages/paymentAcknowledgement";
+@import "./pages/signUpAuth";
+@import "./pages/landingPage";
+@import "./pages/jurisdiction";
+@import "./pages/myDocuments";
+@import "./pages/documentsDisplayContainer";
+
+@import "./pages/commissionerHome";
+@import "./pages/checkout";
+@import "./pages/verifierHome";
+
+@import "./component/header";
+@import "./component/dropdown";
+@import "./component/defaultHeader";
+@import "./component/form";
+@import "./component/nofile";
+@import "./component/templateCard";
+@import "./component/table";
+@import "./component/status";
+
+
+@import "./component/navHeader";
+
+
+@import "./component/testDocument";
+@import "./component/spinner";
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 1px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+body {
+  background-color: #f8f8f8;
+}
