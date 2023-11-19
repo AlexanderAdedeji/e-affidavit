@@ -1,0 +1,78 @@
+ .form-field {
+    label {
+      font-family: Plus Jakarta Text;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 140%;
+      color: #57596c;
+    }
+    .plain-input {
+      padding: 16px 24px 24px;
+      width: 100%;
+      font-family: "Plus Jakarta Text" !important;
+      font-style: normal !important;
+      font-weight: 400 !important;
+      font-size: 14px !important;
+      line-height: 140% !important;
+      height: 53px !important;
+      border: 1px solid #d0d3d8 !important;
+      box-sizing: border-box !important;
+      border-radius: 4px !important;
+    }
+    .plain-input:placeholder {
+      font-family: "Plus Jakarta Text";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 140%;
+      color: #a1a6b1;
+    }
+        textarea:placeholder {
+      font-family: "Plus Jakarta Text";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 140%;
+      color: #a1a6b1;
+    }
+    textarea {
+      font-family: Plus Jakarta Text;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 160%;
+
+      color: #434d64;
+    }
+    .form-field-footer {
+      display: flex;
+      margin-top: 7px;
+      justify-content: flex-end;
+      font-family: Plus Jakarta Text;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 160%;
+      display: flex;
+      align-items: center;
+      color: #7467b6;
+      cursor: pointer;
+      span {
+        margin-right: 7px;
+        font-family: Plus Jakarta Text;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 160%;
+
+        display: flex;
+        align-items: center;
+
+        color: #7467b6;
+      }
+      img {
+        width: 20px;
+      }
+    }
+  }

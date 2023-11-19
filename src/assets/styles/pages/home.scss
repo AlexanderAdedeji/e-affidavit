@@ -1,0 +1,28 @@
+#template-card{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img{
+        width: 200px;
+        cursor: pointer;
+    }
+
+    p{
+       font-family: "Plus Jakarta Text";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 120%;
+      color: #14213d;
+    }
+}
+
+#home{
+    // background-color:  #F8F8F8;
+    // padding: 0px 30px;
+
+    #body{
+        padding: 15px 30px;
+    }
+}
