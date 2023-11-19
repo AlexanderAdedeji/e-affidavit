@@ -156,7 +156,7 @@ const SignUp = ({ setAuthState }) => {
             </button>
           </form>
           <span
-            classNameName="dnthave text-light"
+            className="dnthave text-light"
             onClick={() => {
               setAuthState((prevState) => ({
                 ...prevState,

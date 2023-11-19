@@ -39,7 +39,7 @@ const TemplateCard = ({ affidavit }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         updateDocumentRef({ name: name, price: price });
-        navigate(`/selectJusrisdiction/${route}`);
+        navigate(`/selectJusrisdiction/${"documentLoss"}`);
       }
     });
   };
