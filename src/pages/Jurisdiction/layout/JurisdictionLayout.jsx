@@ -22,7 +22,7 @@ const JurisdictionLayout = ({
           jurisdictionState={jurisdictionState}
           setJurisdictionState={setJurisdictionState}
           id={id}
-          price={price}
+    
    
         />
       </div>

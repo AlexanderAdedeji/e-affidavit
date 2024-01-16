@@ -20,7 +20,7 @@ const Jurisdiction = () => {
         jurisdictionState={jurisdictionState}
         setJurisdictionState={setJurisdictionState}
         id={id}
-        price={location?.state?.price}
+
       />
 
     </div>

@@ -3,6 +3,8 @@ import { DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 import SelectDropDown from "../../../component/SelectDropdown";
 import Back from "../../../assets/images/back.svg";
 
+import {nigerianStates,nigeriaCourtsLocations, nigeriaCourts } from '../../../data'
+
 const SelectJurisdiction = ({
   id,
   jurisdictionState,
@@ -11,15 +13,15 @@ const SelectJurisdiction = ({
 
 }) => {
   const navigate = useNavigate();
-  
-  const nigerianStates = [
-    "Lagos", "Ondo", "Osun", "Imo", "Delta", 
-    "Abuja FCT", "Kano", "Kaduna", "Rivers", "Oyo", 
-    "Anambra", "Enugu", "Edo", "Akwa Ibom", "Kogi", 
-    "Adamawa", "Bauchi", "Borno", "Gombe", "Jigawa", 
-    "Katsina", "Kebbi", "Nasarawa", "Niger", "Plateau", 
-    "Sokoto", "Taraba", "Yobe", "Zamfara"
-];
+
+
+  console.log({"courts": nigeriaCourts.length, "state":nigerianStates.length,"locations":nigeriaCourtsLocations.length})
+  const filteredCourtLocations = nigeriaCourtsLocations.filter(court => court.state === jurisdictionState.state);
+  const filteredCourts = nigeriaCourts.filter(court => court.state === jurisdictionState.state);
+
+
+  console.log({filteredCourtLocations,filteredCourts})
+
 
 
 const courtsInNigeria = [
@@ -89,17 +91,17 @@ const courtsInNigeria = [
               </span>
             </DropdownToggle>
             <DropdownMenu className="dropdown-container">
-              {courtsInNigeria.map((city, idx) => (
+              {filteredCourtLocations.map((court, idx) => (
                 <DropdownItem
                   key={idx}
                   onClick={() =>
                     setJurisdictionState((prevState) => ({
                       ...prevState,
-                      jurisdiction: city,
+                      jurisdiction: court.courtsLocation,
                     }))
                   }
                 >
-                  {city}
+                  {court.courtsLocation}
                 </DropdownItem>
               ))}
             </DropdownMenu>
@@ -123,7 +125,7 @@ const courtsInNigeria = [
               </span>
             </DropdownToggle>
             <DropdownMenu className="dropdown-container">
-              {courtsInNigeria.map(
+              {filteredCourts[0]?.jurisdictions.map(
                 (court, idx) => (
                   <DropdownItem
                     key={idx}
@@ -146,7 +148,7 @@ const courtsInNigeria = [
           <button
             onClick={() => {
               navigate(`/document/${id}`, {
-                state: { ...jurisdictionState, id, price },
+                state: { ...jurisdictionState, id },
               });
             }}
             className="btn btn-dark my-4"

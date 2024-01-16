@@ -3,7 +3,6 @@ import PaystackPop from "@paystack/inline-js";
 import { useLocation } from "react-router-dom";
 
 const Payment = ({ user, documentState, payForDocument, btnLoader, amount }) => {
-  console.log({documentState})
   const location = useLocation()
 
   console.log(location)
