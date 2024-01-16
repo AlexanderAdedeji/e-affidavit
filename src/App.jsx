@@ -16,7 +16,7 @@ import CommissionerHome from "./pages/CommissionerHome";
 import PaymentAcknowledgement from "./pages/PaymentAcknowledgement";
 import Jurisdiction from "./pages/Jurisdiction";
 import LandingPage from "./pages/LandingPage";
-import AffidavitDocument from "./pages/AffideavitDocument";
+// import AffidavitDocument from "./pages/AffideavitDocument";
 import CheckOut from "./pages/Checkout";
 import VerifierHome from "./pages/VerifierHome";
 import DocumentDisplayContainer from "./pages/DocumentsDisplayContainer";

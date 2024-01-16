@@ -7,6 +7,7 @@ const SelectJurisdiction = ({
   id,
   jurisdictionState,
   setJurisdictionState,
+  price
 
 }) => {
   const navigate = useNavigate();
@@ -25,24 +26,7 @@ const courtsInNigeria = [
   "Magistrate Court", 
   "High Court", 
   "Supreme Court",
-  "Sharia Court of Appeal, Adamawa",
-  "Sharia Court of Appeal, Bauchi",
-  "Sharia Court of Appeal, Borno",
-  "Sharia Court of Appeal, Gombe",
-  "Sharia Court of Appeal, Jigawa",
-  "Sharia Court of Appeal, Kaduna",
-  "Sharia Court of Appeal, Kano",
-  "Sharia Court of Appeal, Katsina",
-  "Sharia Court of Appeal, Kebbi",
-  "Sharia Court of Appeal, Kogi",
-  "Sharia Court of Appeal, Nasarawa",
-  "Sharia Court of Appeal, Niger",
-  "Sharia Court of Appeal, Plateau",
-  "Sharia Court of Appeal, Sokoto",
-  "Sharia Court of Appeal, Taraba",
-  "Sharia Court of Appeal, Yobe",
-  "Sharia Court of Appeal, Zamfara",
-  "Sharia Court of Appeal, Abuja"
+  `Sharia Court of Appeal` 
 ];
 
 
@@ -139,7 +123,7 @@ const courtsInNigeria = [
               </span>
             </DropdownToggle>
             <DropdownMenu className="dropdown-container">
-              {["Magistrate Court", "High Court", "Supreme Court"].map(
+              {courtsInNigeria.map(
                 (court, idx) => (
                   <DropdownItem
                     key={idx}
@@ -150,7 +134,7 @@ const courtsInNigeria = [
                       }))
                     }
                   >
-                    {court}
+                    {court +"," +jurisdictionState.state}
                   </DropdownItem>
                 )
               )}
@@ -162,7 +146,7 @@ const courtsInNigeria = [
           <button
             onClick={() => {
               navigate(`/document/${id}`, {
-                state: { ...jurisdictionState, id },
+                state: { ...jurisdictionState, id, price },
               });
             }}
             className="btn btn-dark my-4"

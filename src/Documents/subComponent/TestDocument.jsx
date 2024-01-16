@@ -57,7 +57,7 @@ const TestDocument = ({
         <u>
           <h3>
             <span className="secondary">
-              AFFIDAVIT OF LOSS OF POLICY DOCUMENT NO.{" "}
+              AFFIDAVIT OF LOSS OF  DOCUMENT NO.{" "}
               {docNo === "" ? "{{Document No}}" : docNo.toUpperCase()}
             </span>
           </h3>
@@ -80,20 +80,20 @@ const TestDocument = ({
           1. &nbsp;&nbsp;That I am the above named person
         </p>
         <p className="normal size">
-          2. &nbsp;&nbsp;That I am the lawful owner of the insurance policy with
-          policy No. {docNo === "" ? "{{Document No}}" : docNo.toUpperCase()}{" "}
+          2. &nbsp;&nbsp;That I am the lawful owner of the insurance  with
+           No. {docNo === "" ? "{{Document No}}" : docNo.toUpperCase()}{" "}
           issued to me by {issuer === "" ? " {{Issuer: }} " : issuer} of{" "}
           {issuerAddress === "" ? " {{Issuer Address: }} " : issuerAddress}
         </p>
         <p className="normal size">
           3. &nbsp;&nbsp;That I entered{" "}
           {docType === "" ? "{{Document No}}" : docType.toUpperCase()} with{" "}
-          {issuer === "" ? " {{Issuer: }} " : issuer} with Policy No.{" "}
+          {issuer === "" ? " {{Issuer: }} " : issuer} with  No.{" "}
           {docNo === "" ? "{{Document No}}" : docNo.toUpperCase()}
         </p>
         <p className="normal size">
           4. &nbsp;&nbsp;That the said{" "}
-          {docType === "" ? "{{Document No}}" : docType} Policy got lost in
+          {docType === "" ? "{{Document No}}" : docType}  got lost in
           transit and all efforts made to trace it proved abortive, hence this
           affidavit.
         </p>

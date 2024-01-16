@@ -202,6 +202,7 @@ const CheckOut = () => {
                   btnLoader={checkoutState.btnLoader}
                   documentState={documentDetails.documentRef}
                   payForDocument={payForDocument}
+                  amount ={documentDetails.price}
                 />
               </form>
             </div>

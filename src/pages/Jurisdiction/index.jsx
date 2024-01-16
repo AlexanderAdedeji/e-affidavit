@@ -7,7 +7,7 @@ import JurisdictionLayout from "./layout/JurisdictionLayout";
 const Jurisdiction = () => {
   let { id } = useParams();
   const location = useLocation()
-  console.log(location)
+
   const [jurisdictionState, setJurisdictionState] = useState({
     state: "",
     jurisdiction: "",
@@ -20,6 +20,7 @@ const Jurisdiction = () => {
         jurisdictionState={jurisdictionState}
         setJurisdictionState={setJurisdictionState}
         id={id}
+        price={location?.state?.price}
       />
 
     </div>

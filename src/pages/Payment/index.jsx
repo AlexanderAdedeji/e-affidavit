@@ -1,17 +1,23 @@
 import { useState } from "react";
 import PaystackPop from "@paystack/inline-js";
+import { useLocation } from "react-router-dom";
 
-const Payment = ({ user, documentState, payForDocument, btnLoader }) => {
-  const payStack = (data) => {
-    console.log(data);
+const Payment = ({ user, documentState, payForDocument, btnLoader, amount }) => {
+  console.log({documentState})
+  const location = useLocation()
+
+  console.log(location)
+  const payStack = (amount) => {
+    
+    console.log(user);
     const paystack = new PaystackPop();
 
     paystack.newTransaction({
       key: "pk_test_7bf9c10664ff322e36d94454c6d46dc4ba318cf1",
-      amount: 2000,
-      email: data.email,
-      firstName: data.first_name,
-      lastName: data.last_name,
+      amount: amount*100, 
+      email: user.email,
+      firstName: user.first_name,
+      lastName: user.last_name,
       onSuccess(transaction) {
         console.log(documentState);
         payForDocument(transaction.reference, documentState);
@@ -22,16 +28,16 @@ const Payment = ({ user, documentState, payForDocument, btnLoader }) => {
   return (
     <div className="text-center">
       <button
-        className="btn btn-outline-dark  w-50"
+        className="btn btn-outline-dark w-50"
         type="button"
         onClick={() => {
-          payStack(user);
+          payStack(amount);
         }}
         // disabled={documentState.paymentBtnDisabled}
       >
         {btnLoader ? (
-          <div class="spinner-border text-white sm" role="status">
-            <span class="visually-hidden">Loading...</span>
+          <div className="spinner-border text-white sm" role="status">
+            <span className="visually-hidden">Loading...</span>
           </div>
         ) : (
           <span> Proceed To Checkout</span>

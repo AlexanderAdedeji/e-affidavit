@@ -62,14 +62,18 @@ const LossOfDocumentTemplate = ({
               </span>
             </h3>
           </u>
+
           <u>
             <h3>
               <span className="secondary">
-                AFFIDAVIT OF LOSS OF POLICY DOCUMENT NO.{" "}
+                AFFIDAVIT OF LOSS OF{" "}
+                {docType === "" ? "{{Document}}" : docType.toUpperCase()},
+                DOCUMENT NO.{" "}
                 {docNo === "" ? "{{Document No}}" : docNo.toUpperCase()}
               </span>
             </h3>
           </u>
+
           <p>
             <span className="tertiary">
               I,{" "}
@@ -82,32 +86,35 @@ const LossOfDocumentTemplate = ({
             <span className="higher">
               &nbsp; {gender === "" ? "{{Gender}}" : gender},&nbsp;
               {religion === "" ? "{{Religion}}" : religion}, and{" "}
-              {nationality === "" ? "{{Nationality}}" : nationality},Citizen of{" "}
-              {address === "" ? " {{Address}} " : address} State do hereby
-              declare as follows:
+              {nationality === "" ? "{{Nationality}}" : nationality}, Citizen of{" "}
+              {address === "" ? "{{Address}}" : address} State do hereby declare
+              as follows:
             </span>
           </p>
+
           <p className="normal size">
-            1. &nbsp;&nbsp;That I am the above named person
+            1. &nbsp;&nbsp;That I am the above named person.
           </p>
+
           <p className="normal size">
-            2. &nbsp;&nbsp;That I am the lawful owner of the insurance policy
-            with policy No.{" "}
+            2. &nbsp;&nbsp;That I am the lawful owner of the{" "}
+            {docType === "" ? "{{Document}}" : docType.toUpperCase()} with
+            document No.{" "}
             {docNo === "" ? "{{Document No}}" : docNo.toUpperCase()} issued to
-            me by {issuer === "" ? " {{Issuer: }} " : issuer} of{" "}
-            {issuerAddress === "" ? " {{Issuer Address: }} " : issuerAddress}
+            me by {issuer === "" ? "{{Issuer}}" : issuer} of{" "}
+            {issuerAddress === "" ? "{{Issuer Address}}" : issuerAddress}.
           </p>
+
           <p className="normal size">
             3. &nbsp;&nbsp;That I entered{" "}
-            {docType === "" ? "{{Document No}}" : docType.toUpperCase()} with{" "}
-            {issuer === "" ? " {{Issuer: }} " : issuer} with Policy No.{" "}
-            {docNo === "" ? "{{Document No}}" : docNo.toUpperCase()}
+            {docType === "" ? "{{Document Type}}" : docType.toUpperCase()} with{" "}
+            {issuer === "" ? "{{Issuer}}" : issuer} with Document No.{" "}
+            {docNo === "" ? "{{Document No}}" : docNo.toUpperCase()}.
           </p>
+
           <p className="normal size">
             4. &nbsp;&nbsp;That the said{" "}
-            {docType === "" ? "{{Document No}}" : docType} Policy got lost in
-            transit and all efforts made to trace it proved abortive, hence this
-            affidavit.
+            {docType === "" ? "{{Document Type}}" : docType} {" "}got lost in transit and all efforts made to trace it proved abortive, hence this affidavit
           </p>
           <p className="normal size">
             5. &nbsp;&nbsp;That this affidavit is now needed for record and

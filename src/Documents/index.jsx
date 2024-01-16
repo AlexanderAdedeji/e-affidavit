@@ -161,7 +161,7 @@ const Documents = () => {
               <button
                 onClick={() =>
                   navigate("/checkout", {
-                    state: { savedDocumentId: documentState.savedDocumentId },
+                    state: { savedDocumentId: documentState.savedDocumentId, price:location.state.price },
                   })
                 }
               >
