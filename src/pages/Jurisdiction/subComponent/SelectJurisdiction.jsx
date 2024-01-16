@@ -10,6 +10,42 @@ const SelectJurisdiction = ({
 
 }) => {
   const navigate = useNavigate();
+  
+  const nigerianStates = [
+    "Lagos", "Ondo", "Osun", "Imo", "Delta", 
+    "Abuja FCT", "Kano", "Kaduna", "Rivers", "Oyo", 
+    "Anambra", "Enugu", "Edo", "Akwa Ibom", "Kogi", 
+    "Adamawa", "Bauchi", "Borno", "Gombe", "Jigawa", 
+    "Katsina", "Kebbi", "Nasarawa", "Niger", "Plateau", 
+    "Sokoto", "Taraba", "Yobe", "Zamfara"
+];
+
+
+const courtsInNigeria = [
+  "Magistrate Court", 
+  "High Court", 
+  "Supreme Court",
+  "Sharia Court of Appeal, Adamawa",
+  "Sharia Court of Appeal, Bauchi",
+  "Sharia Court of Appeal, Borno",
+  "Sharia Court of Appeal, Gombe",
+  "Sharia Court of Appeal, Jigawa",
+  "Sharia Court of Appeal, Kaduna",
+  "Sharia Court of Appeal, Kano",
+  "Sharia Court of Appeal, Katsina",
+  "Sharia Court of Appeal, Kebbi",
+  "Sharia Court of Appeal, Kogi",
+  "Sharia Court of Appeal, Nasarawa",
+  "Sharia Court of Appeal, Niger",
+  "Sharia Court of Appeal, Plateau",
+  "Sharia Court of Appeal, Sokoto",
+  "Sharia Court of Appeal, Taraba",
+  "Sharia Court of Appeal, Yobe",
+  "Sharia Court of Appeal, Zamfara",
+  "Sharia Court of Appeal, Abuja"
+];
+
+
   return (
     <div className="select-jurisdiction">
       <div className="go-back" onClick={() => navigate("/home")}>
@@ -35,7 +71,7 @@ const SelectJurisdiction = ({
               </span>
             </DropdownToggle>
             <DropdownMenu className="dropdown-container">
-              {["Lagos", "Ondo", "Osun", "Imo", "Delta"].map((state, idx) => (
+              {nigerianStates.map((state, idx) => (
                 <DropdownItem
                   key={idx}
                   onClick={() =>
@@ -69,7 +105,7 @@ const SelectJurisdiction = ({
               </span>
             </DropdownToggle>
             <DropdownMenu className="dropdown-container">
-              {["Ikeja", "Agege", "Ogba", "Lekki", "Ikoyi"].map((city, idx) => (
+              {courtsInNigeria.map((city, idx) => (
                 <DropdownItem
                   key={idx}
                   onClick={() =>
