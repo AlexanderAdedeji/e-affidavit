@@ -45,7 +45,7 @@ const TestDocument = ({
           <h3>
             <span className="primary">
               THE {court === "" ? "{{Court}}" : court.toUpperCase()} OF{" "}
-              {state === "" ? "{{State}}" : state.toUpperCase()} STATE
+              {state === "" ? "{{State}}" : state.toUpperCase()} {state.toLowerCase() === "federal capital territory" ? "" : "STATE"}
               <br />
               IN THE {city === "" ? "{{City}}" : city.toUpperCase()} JUDICIAL
               DIVISION

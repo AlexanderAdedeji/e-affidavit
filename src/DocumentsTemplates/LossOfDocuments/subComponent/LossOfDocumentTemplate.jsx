@@ -53,7 +53,10 @@ const LossOfDocumentTemplate = ({
             <h3>
               <span className="primary">
                 THE {court === "" ? "{{Court}}" : court.toUpperCase()} OF{" "}
-                {state === "" ? "{{State}}" : state.toUpperCase()} STATE
+                {state === "" ? "{{State}}" : state.toUpperCase()}{" "}
+                {state.toLowerCase() === "federal capital territory"
+                  ? ""
+                  : "STATE"}
                 <br />
                 IN THE {city === "" ? "{{City}}" : city.toUpperCase()} JUDICIAL
                 DIVISION
@@ -114,7 +117,9 @@ const LossOfDocumentTemplate = ({
 
           <p className="normal size">
             4. &nbsp;&nbsp;That the said{" "}
-            {docType === "" ? "{{Document Type}}" : docType} {" "}got lost in transit and all efforts made to trace it proved abortive, hence this affidavit
+            {docType === "" ? "{{Document Type}}" : docType} got lost in transit
+            and all efforts made to trace it proved abortive, hence this
+            affidavit
           </p>
           <p className="normal size">
             5. &nbsp;&nbsp;That this affidavit is now needed for record and
@@ -123,7 +128,9 @@ const LossOfDocumentTemplate = ({
           <p className="normal size">
             6. &nbsp;&nbsp;That I depose this affidavit in good faith and in
             accordance with the Oaths Law of{" "}
-            {state === "" ? "{{State}}" : state} State 2004.
+            {state === "" ? "{{State}}" : state}{" "}
+            {state.toLowerCase() === "federal capital territory" ? "" : "STATE"}{" "}
+            2024.
           </p>
         </div>
 

@@ -18,10 +18,13 @@ const FieldSection = ({
           Upload Image
         </label>
         <input
-        id="fileupload"
+          id="fileupload"
           type="file"
           className="plain-input form-control"
-          onChange={(e) => {convert2base64(e); console.log(e.target.value)}}
+          onChange={(e) => {
+            convert2base64(e);
+            console.log(e.target.value);
+          }}
         />
       </div>
       <div className="mb-3 form-field">
@@ -195,7 +198,7 @@ const FieldSection = ({
             </span>
           </DropdownToggle>
           <DropdownMenu className="dropdown-container">
-            {["Muslim", "Christain"].map((religionType, idx) => (
+            {["Islam", "Christainity"].map((religionType, idx) => (
               <DropdownItem
                 key={idx}
                 className="dropdown-item"
